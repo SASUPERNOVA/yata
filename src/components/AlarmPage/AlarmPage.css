@@ -1,0 +1,25 @@
+@import url('../../css/global.css');
+
+#options {
+    display: grid;
+    gap: 0.3rem;
+}
+  
+#title_input {
+    display: block;
+}
+  
+#body_input {
+    display: block;
+}
+
+main {
+    height: 100%;
+    background-color: #202020;
+}
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0.2rem;
+}

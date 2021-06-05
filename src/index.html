@@ -4,33 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'">
     <title>Hello World!</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/index.css">
   </head>
   <body>
     <header>
       <button id="alarms" class="active">Alarms</button>
       <button id="reminders">Reminders</button>
     </header>
-    <main>
-      <input id="time_input" type="time">
-      <button id="confirm">Notify me!</button>
-      <button id='stop'>Stop!!!</button>
-      <details>
-        <summary>Additional Options</summary>
-        <div id="options">
-          <input id="sound_input" name="sound" type="file" accept="audio/*">
-          <input id="title_input" type="text" placeholder="Notification Title">
-          <textarea id="body_input" placeholder="Notification Body"></textarea>
-        </div>
-      </details>
-      <!-- <p id="time"></p>
-      <script src="time.js" defer></script> -->
-    </main>
-    <footer>
-      <add-button></add-button>
-    </footer>
+    <div id="page-view">
+      <alarm-page></alarm-page>
+    </div>
     <script src="utils/component_loader.js" defer></script>
-    <script src="utils/notify.js" defer></script>
+    <script src="components/AlarmPage/AlarmPage.js" defer></script>
+    <!-- <script src="utils/notify.js" defer></script> -->
     <script src="components/AddButton/AddButton.js" defer></script>
   </body>
 </html>

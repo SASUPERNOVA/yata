@@ -1,3 +1,5 @@
+@import url('global.css');
+
 html, body {
   margin: 0;
   height: 100%;
@@ -7,19 +9,6 @@ body {
   display: grid;
   grid-template-rows: 2.5rem auto;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
-
-#options {
-  display: grid;
-  gap: 0.3rem;
-}
-
-#title_input {
-  display: block;
-}
-
-#body_input {
-  display: block;
 }
 
 header {
@@ -40,14 +29,4 @@ header button:hover:not(.active) {
 
 .active {
   background-color: #202020;
-}
-
-main {
-  background-color: #202020;
-}
-
-footer {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
 }
