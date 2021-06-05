@@ -1,0 +1,12 @@
+.main-button {
+    width: 5rem;
+    height: 5rem;
+    background: linear-gradient(white,white), linear-gradient(white,white), #3167ca;
+    background-position:center;
+    background-size: 50% 0.5em, 0.5em 50%;
+    background-repeat:no-repeat;
+    border-radius: 50%;
+    border: none;
+    display: block;
+    margin: auto;
+}
