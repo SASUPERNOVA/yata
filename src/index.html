@@ -7,28 +7,28 @@
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <div id="navbar">
+    <header>
       <button id="alarms">Alarms</button>
       <button id="reminders">Reminders</button>
-    </div>
-    <input id="time_input" type="time">
-    <button id="confirm">Notify me!</button>
-    <button id='stop'>Stop!!!</button>
-    <details>
-      <summary>Additional Options</summary>
-      <div id="options">
-        <input id="sound_input" name="sound" type="file" accept="audio/*">
-        <input id="title_input" type="text" placeholder="Notification Title">
-        <textarea id="body_input" placeholder="Notification Body"></textarea>
-      </div>
-    </details>
-    <dummy-element></dummy-element>
-    <add-button></add-button>
-    <!-- <p id="time"></p>
-    <script src="time.js" defer></script> -->
+    </header>
+    <main>
+      <input id="time_input" type="time">
+      <button id="confirm">Notify me!</button>
+      <button id='stop'>Stop!!!</button>
+      <details>
+        <summary>Additional Options</summary>
+        <div id="options">
+          <input id="sound_input" name="sound" type="file" accept="audio/*">
+          <input id="title_input" type="text" placeholder="Notification Title">
+          <textarea id="body_input" placeholder="Notification Body"></textarea>
+        </div>
+      </details>
+      <add-button></add-button>
+      <!-- <p id="time"></p>
+      <script src="time.js" defer></script> -->
+    </main>
     <script src="component_loader.js"></script>
     <script src="notify.js" defer></script>
-    <script src="components/dummy/dummy.js" defer></script>
     <script src="components/AddButton/AddButton.js" defer></script>
   </body>
 </html>
