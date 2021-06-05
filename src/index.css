@@ -4,6 +4,8 @@ html, body {
 }
 
 body {
+  display: grid;
+  grid-template-rows: 2.5rem auto;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -18,6 +20,30 @@ body {
 
 #body_input {
   display: block;
+}
+
+header {
+  background-color: #404040;
+}
+
+header button {
+  height: 2.5rem;
+  float: left;
+  border: 0;
+  background-color: #404040;
+  color: white;
+}
+
+header button:hover:not(.active) {
+  background-color: #303030;
+}
+
+.active {
+  background-color: #202020;
+}
+
+main {
+  background-color: #202020;
 }
 
 footer {
