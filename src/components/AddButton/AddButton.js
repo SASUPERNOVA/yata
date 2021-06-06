@@ -1,6 +1,11 @@
 (() => {
     loadComponent('components/AddButton/AddButton.html', 'add-button', eventListeners);
 
+    const pages = {
+        'alarm-page': 'alarm-component',
+        'reminder-page': 'reminder-component'
+    };
+
     function eventListeners() {
         const root = this.shadowRoot;
 
@@ -8,7 +13,8 @@
     }
 
     function click() {
-        const alarm = document.createElement('alarm-component');
-        document.querySelector('alarm-page').shadowRoot.querySelector('main').appendChild(alarm);
+        const currentPage = document.getElementById('page-view').children[0].tagName.toLowerCase();
+        const childComponent = document.createElement(pages[currentPage]);
+        document.querySelector(currentPage).shadowRoot.querySelector('main').appendChild(childComponent);
     }
 })();
