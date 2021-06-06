@@ -8,6 +8,7 @@
     }
 
     function click() {
-        alert('Added!!!');
+        const alarm = document.createElement('alarm-component');
+        document.querySelector('alarm-page').shadowRoot.querySelector('main').appendChild(alarm);
     }
 })();

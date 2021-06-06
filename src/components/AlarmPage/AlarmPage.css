@@ -1,16 +1,3 @@
-#options {
-    display: grid;
-    gap: 0.3rem;
-}
-  
-#title_input {
-    display: block;
-}
-  
-#body_input {
-    display: block;
-}
-
 main {
     color: white;
     height: 100%;
