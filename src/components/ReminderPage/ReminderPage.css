@@ -1,4 +1,9 @@
 main {
+    color: white;
     height: 100%;
     background-color: #202020;
+}
+
+p {
+    display: inline;
 }

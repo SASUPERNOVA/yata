@@ -1,3 +1,3 @@
 (() => {
-    loadComponent('components/ReminderPage', 'reminder-page');
+    loadComponent('components/ReminderPage/ReminderPage.html', 'reminder-page');
 })();
