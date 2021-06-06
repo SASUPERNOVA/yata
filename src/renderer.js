@@ -6,7 +6,6 @@
 
     for (const [key, val] of Object.entries(tabs)) {
         const tab = document.getElementById(key);
-        console.log(tab);
         tab.addEventListener('click', () => {
             document.querySelector('header .active').classList.remove('active');
             tab.classList.add('active');
