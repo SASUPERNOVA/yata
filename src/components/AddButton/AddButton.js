@@ -1,7 +1,7 @@
 let AddButton = {};
 
 (() => {
-    loadComponent('components/AddButton/AddButton.html', 'add-button', 'add-button');
+    loadComponent('components/AddButton/AddButton.html', 'add-button');
 
     const click = () => {
         console.log('OK');

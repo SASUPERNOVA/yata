@@ -1,4 +1,5 @@
 async function loadComponent(path, name, templateID, extendsTarget=HTMLElement) {
+    templateID = templateID || name;
     const parser = new DOMParser();
     const htmlFile = await (await fetch(path)).text();
     const vPage = parser.parseFromString(htmlFile, 'text/html');
