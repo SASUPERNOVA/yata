@@ -1,5 +1,5 @@
 const ReminderPage = {};
 
 (() => {
-    load_component('components/ReminderPage', 'reminder-page', 'reminder-page');
+    loadComponent('components/ReminderPage', 'reminder-page', 'reminder-page');
 })();
