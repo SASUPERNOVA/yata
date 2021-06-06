@@ -11,7 +11,11 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 1024,
     height: 800,
-    icon: path.join(__dirname, 'Dummy.png')
+    icon: path.join(__dirname, 'Dummy.png'),
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true
+    }
   });
   //mainWindow.removeMenu();
 

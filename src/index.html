@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
     <title>Hello World!</title>
     <link rel="stylesheet" href="css/index.css">
   </head>
@@ -14,6 +14,7 @@
     <div id="page-view">
       <alarm-page></alarm-page>
     </div>
+    <script src='renderer.js' defer></script>
     <script src="utils/component-loader.js" defer></script>
     <script src="components/AlarmPage/AlarmPage.js" defer></script>
     <!-- <script src="utils/notify.js" defer></script> -->

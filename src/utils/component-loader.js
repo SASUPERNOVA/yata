@@ -1,4 +1,4 @@
-async function loadComponent(path, name, templateID, extendsTarget=HTMLElement) {
+async function loadComponent(path, name, eventListeners, templateID, extendsTarget=HTMLElement) {
     templateID = templateID || name;
     const parser = new DOMParser();
     const htmlFile = await (await fetch(path)).text();
@@ -16,6 +16,10 @@ async function loadComponent(path, name, templateID, extendsTarget=HTMLElement) 
                 shadowRoot.appendChild(style.cloneNode(false));
             }
             shadowRoot.appendChild(templateContent.cloneNode(true));
+
+            if (eventListeners) {
+                eventListeners.apply(this);
+            }
         }
     });
 }

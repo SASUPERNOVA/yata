@@ -1,12 +1,13 @@
-let AddButton = {};
-
 (() => {
-    loadComponent('components/AddButton/AddButton.html', 'add-button');
+    loadComponent('components/AddButton/AddButton.html', 'add-button', eventListeners);
 
-    const click = () => {
-        console.log('OK');
-        alert('Added!!!');
+    function eventListeners() {
+        const root = this.shadowRoot;
+
+        root.querySelector('#add').addEventListener('click', click);
     }
 
-    AddButton = {click};
+    function click() {
+        alert('Added!!!');
+    }
 })();
