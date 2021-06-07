@@ -1,3 +1,10 @@
+:root {
+    --switch-width: 3rem;
+    --switch-height: 1.5rem;
+    --slider-size: 1rem;
+    --slider-radius: 2rem;
+  }
+
 *:focus {
     outline: 2px solid #3167ca;
 }
