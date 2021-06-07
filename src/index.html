@@ -8,13 +8,16 @@
     <link rel="stylesheet" href="css/index.css">
   </head>
   <body>
-    <header>
-      <button id="alarms" class="active">Alarms</button>
-      <button id="reminders">Reminders</button>
-    </header>
-    <div id="page-view">
-      <alarm-page></alarm-page>
+    <div id="app">
+      <header>
+        <button id="alarms" class="active">Alarms</button>
+        <button id="reminders">Reminders</button>
+      </header>
+      <div id="page-view">
+        <alarm-page></alarm-page>
+      </div>
     </div>
+    <modal-component></modal-component>
     <script src='renderer.js' defer></script>
     <script src="utils/component-loader.js" defer></script>
     <script src="utils/component-utils.js" defer></script>
@@ -23,6 +26,7 @@
     <script src="components/ReminderPage/ReminderPage.js" defer></script>
     <script src="components/ToggleSwitch/ToggleSwitch.js" defer></script>
     <script src="components/AddButton/AddButton.js" defer></script>
+    <script src="components/Modal/Modal.js" defer></script>
     <!-- <script src="utils/notify.js" defer></script> -->
   </body>
 </html>
