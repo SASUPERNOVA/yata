@@ -10,3 +10,8 @@
 #body_input {
     display: block;
 }
+
+details {
+    user-select: none;
+    cursor: pointer;
+}

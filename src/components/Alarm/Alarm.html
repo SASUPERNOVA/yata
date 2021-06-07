@@ -1,15 +1,15 @@
 <link rel="stylesheet" href="css/global.css">
 <link rel="stylesheet" href="components/Alarm/Alarm.css">
 <template id="alarm-component">
-    <input id="time_input" type="time">
-    <button id="confirm">Notify me!</button>
-    <button id="stop">Stop!!!</button>
+    <input id="time-input" type="time">
+    <toggle-switch></toggle-switch>
+    <!-- <button id="stop">Stop!!!</button> -->
     <details>
-        <summary>Additional Options</summary>
+        <summary></summary>
         <div id="options">
-        <input id="sound_input" name="sound" type="file" accept="audio/*">
-        <input id="title_input" type="text" placeholder="Notification Title">
-        <textarea id="body_input" placeholder="Notification Body"></textarea>
+        <input id="sound-input" name="sound" type="file" accept="audio/*">
+        <input id="title-input" type="text" placeholder="Notification Title">
+        <textarea id="body-input" placeholder="Notification Body"></textarea>
         </div>
     </details>
 </template>
