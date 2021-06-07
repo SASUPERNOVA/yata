@@ -8,6 +8,6 @@
     }
 
     function deleteClick(ev) {
-        ev.target.getRootNode().host.remove();
+        parentComponent(ev.target).remove();
     }
 })();
