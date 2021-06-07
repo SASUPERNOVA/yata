@@ -3,15 +3,26 @@
     gap: 0.3rem;
 }
   
-#title_input {
+#title-input {
     display: block;
 }
   
-#body_input {
+#body-input {
     display: block;
 }
 
 details {
     user-select: none;
+}
+
+#sound-input {
+    display: none;
+}
+
+#sound-input-label {
+    border: 1px solid #ccc;
+    display: inline-block;
+    width: 6rem;
+    padding: 0.5rem 1rem;
     cursor: pointer;
 }

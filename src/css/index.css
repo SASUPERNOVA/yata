@@ -5,6 +5,7 @@ html, body {
 
 body {
   display: grid;
+  background-color: #202020;
   grid-template-rows: 2.5rem auto;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
@@ -27,4 +28,9 @@ header button:hover:not(.active) {
 
 .active {
   background-color: #202020;
+}
+
+#page-view {
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
 }
