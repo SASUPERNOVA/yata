@@ -4,6 +4,10 @@
     function eventListeners() {
         const root = this.shadowRoot;
 
-        //root.querySelector('#add').addEventListener('click', click);
+        root.querySelector('#delete-button').addEventListener('click', deleteClick);
+    }
+
+    function deleteClick(ev) {
+        ev.target.getRootNode().host.remove();
     }
 })();
