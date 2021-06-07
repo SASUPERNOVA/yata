@@ -19,6 +19,6 @@
     }
 
     function deleteClick(ev) {
-        parentComponent(ev.target).remove();
+        hostComponent(ev.target).remove();
     }
 })();

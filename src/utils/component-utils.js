@@ -1,3 +1,3 @@
-function parentComponent(component) {
+function hostComponent(component) {
     return component.getRootNode().host;
 }

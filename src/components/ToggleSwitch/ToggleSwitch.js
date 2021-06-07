@@ -9,6 +9,6 @@
     
     function checkboxChange(ev) {
         const checked = ev.target.checked;
-        parentComponent(parentComponent(ev.target)).dispatchEvent(new CustomEvent('toggleswitch-toggle', {detail: { checked: checked }}));
+        hostComponent(hostComponent(ev.target)).dispatchEvent(new CustomEvent('toggleswitch-toggle', {detail: { checked: checked }}));
     }
 })();
