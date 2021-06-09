@@ -1,24 +1,28 @@
 (() => {
-    loadComponent('components/Alarm/Alarm.html', 'alarm-component', eventListeners);
-
-    function eventListeners() {
-        const root = this.shadowRoot;
-
-        root.querySelector('#delete-button').addEventListener('click', deleteClick);
-
-        this.addEventListener('toggleswitch-toggle', alarmSet);
-    }
-
-    function alarmSet(ev) {
-        if (ev.detail.checked) {
-            new Notification('Alarm', {body: 'An alarm has been set...'});
+    class Alarm extends WebComponent {
+        constructor() {
+            super('components/Alarm/Alarm.html', 'alarm-component');
         }
-        else {
-            new Notification('Alarm', {body: 'An alarm has been disabled...'});
+
+        async connectedCallback() {
+            await super.connectedCallback();
+            this.shadowRoot.querySelector('#delete-button').addEventListener('click', (ev) => this.deleteClick(ev));
+            this.addEventListener('toggleswitch-toggle', (ev) => this.alarmSet(ev));
+        }
+
+        alarmSet(ev) {
+            if (ev.detail.checked) {
+                new Notification('Alarm', { body: 'An alarm has been set...' });
+            }
+            else {
+                new Notification('Alarm', { body: 'An alarm has been disabled...' });
+            }
+        }
+
+        deleteClick(ev) {
+            this.remove();
         }
     }
 
-    function deleteClick(ev) {
-        hostComponent(ev.target).remove();
-    }
+    customElements.define('alarm-component', Alarm);
 })();

@@ -1,13 +1,18 @@
 (() => {
-    loadComponent('components/AddButton/AddButton.html', 'add-button', eventListeners);
+    class AddButton extends WebComponent {
+        constructor() {
+            super('components/AddButton/AddButton.html', 'add-button');
+        }
 
-    function eventListeners() {
-        const root = this.shadowRoot;
+        async connectedCallback() {
+            await super.connectedCallback();
+            this.shadowRoot.querySelector('#add').addEventListener('click', (ev) => this.click(ev));
+        }
 
-        root.querySelector('#add').addEventListener('click', click);
+        click(ev) {
+            this.hostComponent().dispatchEvent(new CustomEvent('addbutton-click'));
+        }
     }
 
-    function click(ev) {
-        hostComponent(hostComponent(ev.target)).dispatchEvent(new CustomEvent('addbutton-click'));
-    }
+    customElements.define('add-button', AddButton);
 })();

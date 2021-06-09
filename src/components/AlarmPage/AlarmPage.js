@@ -1,15 +1,19 @@
 (() => {
-    loadComponent('components/AlarmPage/AlarmPage.html', 'alarm-page', eventListeners);
+    class AlarmPage extends WebComponent {
+        constructor() {
+            super('components/AlarmPage/AlarmPage.html', 'alarm-page');
+        }
 
-    function eventListeners() {
-        this.addEventListener('addbutton-click', onAddButtonClick);
+        async connectedCallback() {
+            await super.connectedCallback();
+            this.addEventListener('addbutton-click', (ev) => this.onAddButtonClick(ev));
+        }
+
+        onAddButtonClick(ev) {
+            const alarmComponent = document.createElement('alarm-component');
+            this.shadowRoot.querySelector('main').appendChild(alarmComponent); 
+        }
     }
 
-    function onAddButtonClick(ev) {
-        const root = ev.target.shadowRoot;
-
-        const alarmComponent = document.createElement('alarm-component');
-        
-        root.querySelector('main').appendChild(alarmComponent);
-    }
+    customElements.define('alarm-page', AlarmPage);
 })();

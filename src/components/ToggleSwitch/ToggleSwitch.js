@@ -1,14 +1,19 @@
 (() => {
-    loadComponent('components/ToggleSwitch/ToggleSwitch.html', 'toggle-switch', eventListeners);
+    class ToggleSwitch extends WebComponent {
+        constructor() {
+            super('components/ToggleSwitch/ToggleSwitch.html', 'toggle-switch');
+        }
 
-    function eventListeners() {
-        const root = this.shadowRoot;
+        async connectedCallback() {
+            await super.connectedCallback();
+            this.shadowRoot.querySelector('#checkbox').addEventListener('change', (ev) => this.change(ev));
+        }
 
-        root.querySelector('#checkbox').addEventListener('change', change);
+        change(ev) {
+            const checked = ev.target.checked;
+            super.hostComponent().dispatchEvent(new CustomEvent('toggleswitch-toogle', {detail: {checked: checked}}));
+        }
     }
-    
-    function change(ev) {
-        const checked = ev.target.checked;
-        hostComponent(hostComponent(ev.target)).dispatchEvent(new CustomEvent('toggleswitch-toggle', {detail: { checked: checked }}));
-    }
+
+    customElements.define('toggle-switch', ToggleSwitch);
 })();
