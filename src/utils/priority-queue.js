@@ -32,6 +32,29 @@ class PriorityQueue {
         return front;
     }
 
+    swap(item, oldPriority, newPriority) {
+        const swapIndex = this.elements[oldPriority].findIndex(i => {
+            for (const [key, val] of Object.entries(i)) {
+                if (i[key] != item[key]) {
+                    return false;
+                }
+            }
+            return true;
+        });
+
+        if (swapIndex > -1) {
+            this.elements[oldPriority].splice(swapIndex, 1);
+            this.put(item, newPriority);
+
+            if (this.elements[oldPriority].length === 0) {
+                delete this.elements[oldPriority];
+                if (oldPriority === this.minKey) {
+                    this.minKey = this.min();
+                }
+            }
+        }
+    }
+
     min() {
         if (this.empty()) {
             return Infinity;
