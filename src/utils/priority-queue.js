@@ -33,14 +33,10 @@ class PriorityQueue {
     }
 
     swap(item, oldPriority, newPriority) {
-        const swapIndex = this.elements[oldPriority].findIndex(i => {
-            for (const [key, val] of Object.entries(i)) {
-                if (i[key] != item[key]) {
-                    return false;
-                }
-            }
-            return true;
-        });
+        if (!this.elements.hasOwnProperty(oldPriority)) {
+            return;
+        }
+        const swapIndex = this.getIndex(item, oldPriority);
 
         if (swapIndex > -1) {
             this.elements[oldPriority].splice(swapIndex, 1);
@@ -53,6 +49,35 @@ class PriorityQueue {
                 }
             }
         }
+    }
+
+    delete(item, priority) {
+        if (!this.elements.hasOwnProperty(oldPriority)) {
+            return;
+        }
+        const removeIndex = this.getIndex(item, priority);
+
+        if (removeIndex > -1) {
+            this.elements[priority].splice[removeIndex, 1];
+
+            if (this.elements[priority].length === 0) {
+                delete this.elements[priority];
+                if (priority === this.minKey) {
+                    this.minKey = this.min();
+                }
+            }
+        }
+    }
+
+    getIndex(item, priority) {
+        return this.elements[priority].findIndex(i => {
+            for (const [key, val] of Object.entries(i)) {
+                if (i[key] != item[key]) {
+                    return false;
+                }
+            }
+            return true;
+        });
     }
 
     min() {
