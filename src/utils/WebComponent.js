@@ -23,9 +23,9 @@ class WebComponent extends HTMLElement {
         let { templateContent, styles } = await this._loadTemplateFile(this.path, this.name, this.templateID);
         const shadowRoot = this.attachShadow({ mode: 'open' });
         for (const style of styles) {
-            this.shadowRoot.appendChild(style.cloneNode(false));
+            shadowRoot.appendChild(style.cloneNode(false));
         }
-        this.shadowRoot.appendChild(templateContent.cloneNode(true));
+        shadowRoot.appendChild(templateContent.cloneNode(true));
     }
 
     async connectedCallback() {

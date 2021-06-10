@@ -16,4 +16,5 @@
     }
 
     customElements.define('alarm-page', AlarmPage);
+    document.dispatchEvent(new CustomEvent('register-page', {detail: {componentName: 'alarm-page', className: AlarmPage}}));
 })();
