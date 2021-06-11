@@ -11,7 +11,7 @@
 
         change(ev) {
             const checked = ev.target.checked;
-            super.hostComponent().dispatchEvent(new CustomEvent('toggleswitch-toogle', {detail: {checked: checked}}));
+            this.hostComponent().dispatchEvent(new CustomEvent('toggleswitch-toggle', {detail: {checked: checked}}));
         }
     }
 
