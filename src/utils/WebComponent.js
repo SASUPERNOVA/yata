@@ -37,10 +37,13 @@ class WebComponent extends HTMLElement {
     }
 
     genURefId() {
-        /*! https://gist.github.com/jed/982883 */
-        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-          );
+        let refId = new Uint8Array(16);
+        crypto.getRandomValues(refId);
+        refId[6] = 64 + (refId[6] & ((1 << 4) - 1));
+        refId[8] = 128 + (refId[8] & ((1 << 6) - 1));
+        refId = Array.from(refId).map(byte => byte.toString(16).padStart(2, '0'));
+        refId = `${refId.slice(0, 4).join('')}-${refId.slice(4, 6).join('')}-${refId.slice(6, 8).join('')}-${refId.slice(8, 10).join('')}-${refId.slice(10).join('')}`;
+        return refId;
     }
 
     setRefId(refId) {
