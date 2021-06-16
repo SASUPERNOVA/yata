@@ -51,14 +51,14 @@ class PriorityQueue {
         }
     }
 
-    delete(item, priority) {
-        if (!this.elements.hasOwnProperty(oldPriority)) {
+    remove(item, priority) {
+        if (!this.elements.hasOwnProperty(priority)) {
             return;
         }
         const removeIndex = this.getIndex(item, priority);
 
         if (removeIndex > -1) {
-            this.elements[priority].splice[removeIndex, 1];
+            this.elements[priority].splice(removeIndex, 1);
 
             if (this.elements[priority].length === 0) {
                 delete this.elements[priority];
