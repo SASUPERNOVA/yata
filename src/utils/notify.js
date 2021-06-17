@@ -46,20 +46,30 @@
 // }
 
 (() => {
-    let globalNotificationArray = [];
-    let pauseRef = null;
-    let timer = setInterval(pollGNA, 1000);
+    let timerQueue = new PriorityQueue();
+    const pollQueue = () => {
+        let time = new Date();
 
-    function pollGNA() {
-        for (const componentClass of globalNotificationArray) {
-            //console.log(componentClass);
+        if (time >= timerQueue.minKey) {
+            let refId = timerQueue.getFront();
+            console.log('Sending message...');
+            
+            refIds[refId].page.dispatchEvent(new CustomEvent('timer-finished', {detail: refId}));
         }
     }
 
-    document.addEventListener('register-page', (ev) => {
-        let {componentName, className} = ev.detail;
-        globalNotificationArray.push({componentName, className});
-    });
+    let refIds = {};
+    let pauseRef = null;
+    let timer = setInterval(pollQueue, 1000);
+
+    document.addEventListener('set-timer', ev => {
+        let {time, page, refId} = ev.detail;
+        if (refIds[refId]) {
+            timerQueue.remove(refId, refIds[refId].time);
+        }
+        timerQueue.put(refId, time);
+        refIds[refId] = {time, page};
+    } )
 
     document.addEventListener('pause-timer', (ev) => {
         if (!pauseRef) {
@@ -71,7 +81,7 @@
     document.addEventListener('resume-timer', (ev) => {
         if (pauseRef == ev.target) {
             pauseRef = null;
-            timer = setInterval(pollGNA, 1000);
+            timer = setInterval(pollQueue, 1000);
         }
     });
 })();
