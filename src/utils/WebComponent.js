@@ -29,7 +29,9 @@ class WebComponent extends HTMLElement {
     }
 
     async connectedCallback() {
-        await this._initComponent();
+        if (!this.shadowRoot) {
+            await this._initComponent();
+        }
     }
 
     hostComponent() {
