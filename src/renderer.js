@@ -13,4 +13,9 @@
             document.getElementById('page-view').children[0].replaceWith(currentPage);
         });
     }
+
+    document.addEventListener('data-received', ev => {
+        const data = ev.detail;
+        console.log(data);
+    });
 })();

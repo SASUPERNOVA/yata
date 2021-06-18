@@ -4,9 +4,22 @@ contextBridge.exposeInMainWorld('yanuAPI', {
     dummy: () => {
         console.log('I am a dummy');
     },
-    ping: () => ipcRenderer.send('ping')
+    saveFile: (fileName, data) => {
+        ipcRenderer.send('save-file', fileName, data);
+    },
+    loadFile: (fileName) => {
+        ipcRenderer.send('load-file', fileName);
+    }
 });
 
-ipcRenderer.on('pong', () => {
-    alert('PONG!!!');
-})
+ipcRenderer.on('save-failed', (event, err) => {
+    console.log(err);
+});
+
+ipcRenderer.on('load-failed', (event, err) => {
+    console.log(err);
+});
+
+ipcRenderer.on('load-success', (event, data) => {
+    document.dispatchEvent(new CustomEvent('data-received', {detail: data}));
+});
