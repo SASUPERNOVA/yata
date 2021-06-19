@@ -16,6 +16,6 @@
 
     document.addEventListener('data-received', ev => {
         const data = ev.detail;
-        console.log(data);
+        document.querySelector('#page-view').firstElementChild.dispatchEvent(new CustomEvent('data-received', {detail: data}));
     });
 })();
