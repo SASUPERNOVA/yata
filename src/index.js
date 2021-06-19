@@ -63,7 +63,7 @@ ipcMain.on('load-file', (event, fileName) => {
       event.sender.send('load-failed', err);
     }
     else {
-      event.sender.send('load-success', data);
+      event.sender.send('load-success', JSON.parse(data));
     }
   });
 });
