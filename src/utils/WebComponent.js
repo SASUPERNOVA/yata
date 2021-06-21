@@ -53,4 +53,14 @@ class WebComponent extends HTMLElement {
             this.setAttribute('ref-id', refId);
         }
     }
+
+    onShadowRootReady(callback) {
+        const timer = setInterval(() => {
+            if (!this.shadowRoot) {
+                return;
+            }
+            callback();
+            clearInterval(timer);
+        }, 1);
+    }
 }
