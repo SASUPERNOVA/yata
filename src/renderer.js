@@ -10,7 +10,7 @@
             document.querySelector('header .active').classList.remove('active');
             tab.classList.add('active');
             const currentPage = document.createElement(val);
-            document.getElementById('page-view').children[0].replaceWith(currentPage);
+            document.getElementById('page-view').firstElementChild.replaceWith(currentPage);
         });
     }
 
