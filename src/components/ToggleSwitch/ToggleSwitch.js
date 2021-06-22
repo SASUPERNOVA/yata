@@ -7,6 +7,12 @@
         async connectedCallback() {
             await super.connectedCallback();
             this.shadowRoot.querySelector('#checkbox').addEventListener('change', (ev) => this.change(ev));
+            this.setAttribute('checked', false);
+        }
+
+        setChecked(checked) {
+            this.shadowRoot.querySelector('#checkbox').checked = checked == 'true';
+            this.setAttribute('checked', checked);
         }
 
         change(ev) {
