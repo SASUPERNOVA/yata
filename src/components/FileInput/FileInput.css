@@ -1,0 +1,10 @@
+#sound-input {
+    display: none;
+}
+
+#sound-input-label {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}

@@ -24,7 +24,10 @@
             this.props.toggleSwitch.onShadowRootReady(() => {
                 this.props.toggleSwitch.setChecked(state.toggleSwitch);
             });
-            this.props.soundInput.value = state.soundInput;
+            this.props.soundInput.onShadowRootReady(() => {
+                this.props.soundInput.value = state.soundInput;
+                this.props.soundInput.setAccept('audio/*');
+            });
             this.props.titleInput.value = state.titleInput;
             this.props.bodyInput.value = state.bodyInput;
         }
