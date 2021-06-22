@@ -47,6 +47,9 @@
 
 (() => {
     let timerQueue = new PriorityQueue();
+    let refIds = {};
+    let pauseRef = null;
+    
     const pollQueue = () => {
         let time = new Date();
 
@@ -58,8 +61,6 @@
         }
     }
 
-    let refIds = {};
-    let pauseRef = null;
     let timer = setInterval(pollQueue, 1000);
 
     document.addEventListener('set-timer', ev => {
