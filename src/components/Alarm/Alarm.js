@@ -19,6 +19,16 @@
             this.props.timeInput.addEventListener('change', (ev) => this.onTimeChange(ev));
         }
 
+        setState(state) {
+            this.props.timeInput.value = state.timeInput;
+            this.props.toggleSwitch.onShadowRootReady(() => {
+                this.props.toggleSwitch.setChecked(state.toggleSwitch);
+            });
+            this.props.soundInput.value = state.soundInput;
+            this.props.titleInput.value = state.titleInput;
+            this.props.bodyInput.value = state.bodyInput;
+        }
+
         onTimeChange(ev) {
             if (!this.props.toggleSwitch.getAttribute('checked')) {
                 return;
@@ -33,7 +43,6 @@
                 refId: this.getAttribute('ref-id')
             }
             document.dispatchEvent(new CustomEvent('set-timer', {detail: message}));
-            //console.log(message);
         }
 
         alarmSet(ev) {
