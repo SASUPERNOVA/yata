@@ -19,6 +19,16 @@
             this.props.timeInput.addEventListener('change', (ev) => this.onTimeChange(ev));
         }
 
+        getState() {
+            return {
+                timeInput: this.props.timeInput.value,
+                toggleSwitch: this.props.toggleSwitch.value,
+                soundInput: this.props.soundInput.value,
+                titleInput: this.props.titleInput.value,
+                bodyInput: this.props.bodyInput.value
+            }
+        }
+
         setState(state) {
             this.props.timeInput.value = state.timeInput;
             this.props.toggleSwitch.onShadowRootReady(() => {
