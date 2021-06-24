@@ -15,6 +15,7 @@
         setChecked(checked) {
             this.shadowRoot.querySelector('#checkbox').checked = checked == 'true';
             this.setAttribute('checked', checked);
+            this.checked = checked;
         }
 
         change(ev) {
