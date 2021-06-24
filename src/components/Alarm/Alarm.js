@@ -59,19 +59,18 @@
         }
 
         alarmSet(ev) {
-            console.log('setting alarm...', ev.target.checked);
-            // if (ev.detail.checked) {
-            //     new Notification('Alarm', { body: 'An alarm has been set...' });
-            //     const message = {
-            //         time: date.valueOf(),
-            //         page: this.hostComponent(),
-            //         refId: this.getAttribute('ref-id')
-            //     }
-            //     document.dispatchEvent(new CustomEvent('set-timer', {detail: message}));
-            // }
-            // else {
-            //     new Notification('Alarm', { body: 'An alarm has been disabled...' });
-            // }
+            if (ev.target.checked) {
+                new Notification('Alarm', { body: 'An alarm has been set...' });
+                const message = {
+                    time: date.valueOf(),
+                    page: this.hostComponent(),
+                    refId: this.getAttribute('ref-id')
+                }
+                document.dispatchEvent(new CustomEvent('set-timer', {detail: message}));
+            }
+            else {
+                new Notification('Alarm', { body: 'An alarm has been disabled...' });
+            }
         }
 
         deleteClick(ev) {
