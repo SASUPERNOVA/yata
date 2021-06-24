@@ -30,7 +30,8 @@
         }
 
         setState(state) {
-            this.props.timeInput.value = state.timeInput;
+            const date = new Date(state.timeInput)
+            this.props.timeInput.value = `${date.getHours()}:${date.getMinutes()}`;
             this.props.toggleSwitch.onShadowRootReady(() => {
                 this.props.toggleSwitch.setChecked(state.toggleSwitch);
             });
@@ -51,7 +52,7 @@
             date.setHours(time[0]);
             date.setMinutes(time[1]);
             const message = {
-                time: date.valueOf(),
+                time: date.getTime(),
                 page: this.hostComponent(),
                 refId: this.getAttribute('ref-id')
             }
@@ -62,7 +63,7 @@
             if (ev.target.checked) {
                 new Notification('Alarm', { body: 'An alarm has been set...' });
                 const message = {
-                    time: date.valueOf(),
+                    time: date.getTime(),
                     page: this.hostComponent(),
                     refId: this.getAttribute('ref-id')
                 }
