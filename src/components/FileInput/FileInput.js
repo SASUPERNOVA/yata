@@ -8,11 +8,17 @@
 
         async connectedCallback() {
             await super.connectedCallback();
-            this.shadowRoot.querySelector('#sound-input').addEventListener('changed', ev => this.setValue(ev.target.value));
+            this.shadowRoot.querySelector('#sound-input').addEventListener('change', ev => this.change(ev));
+            this.shadowRoot.querySelector('#sound-input').addEventListener('input', ev => this.input(ev));
         }
 
-        setValue(value) {
-            this.value = value;
+        change(ev) {
+            this.value = ev.target.value;
+            this.dispatchEvent(new Event('change'));
+        }
+
+        input(ev) {
+            this.dispatchEvent(new Event('input'));
         }
 
         setAccept(accept) {
