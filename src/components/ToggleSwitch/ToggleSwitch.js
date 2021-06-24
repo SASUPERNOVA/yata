@@ -2,13 +2,13 @@
     class ToggleSwitch extends WebComponent {
         constructor() {
             super('components/ToggleSwitch/ToggleSwitch.html', 'toggle-switch');
+            this.checked = false;
         }
 
         async connectedCallback() {
             await super.connectedCallback();
             this.shadowRoot.querySelector('#checkbox').addEventListener('change', (ev) => this.change(ev));
             this.shadowRoot.querySelector('#checkbox').addEventListener('input', ev => this.input(ev));
-            this.checked = false;
             this.setAttribute('checked', false);
         }
 
