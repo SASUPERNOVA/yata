@@ -1,4 +1,3 @@
-//Alarm Sound
 (() => {
     class FileInput extends WebComponent {
         constructor() {
