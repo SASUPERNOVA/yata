@@ -7,6 +7,8 @@
         async connectedCallback() {
             await super.connectedCallback();
             this.shadowRoot.querySelector('#checkbox').addEventListener('change', (ev) => this.change(ev));
+            this.shadowRoot.querySelector('#checkbox').addEventListener('input', ev => this.input(ev));
+            this.checked = false;
             this.setAttribute('checked', false);
         }
 
@@ -16,9 +18,13 @@
         }
 
         change(ev) {
-            const checked = ev.target.checked;
-            this.setAttribute('checked', checked);
-            this.hostComponent().dispatchEvent(new CustomEvent('toggleswitch-toggle', {detail: {checked: checked}}));
+            this.checked = ev.target.checked;
+            this.setAttribute('checked', this.checked);
+            this.dispatchEvent(new Event('change'));
+        }
+
+        input(ev) {
+            this.dispatchEvent(new Event('input'));
         }
     }
 

@@ -8,7 +8,6 @@
             await super.connectedCallback();
             this.setRefId(this.genURefId());
             this.shadowRoot.querySelector('#delete-button').addEventListener('click', (ev) => this.deleteClick(ev));
-            this.addEventListener('toggleswitch-toggle', (ev) => this.alarmSet(ev));
             this.props = {
                 timeInput: this.shadowRoot.querySelector('#time-input'),
                 toggleSwitch: this.shadowRoot.querySelector('toggle-switch'),
@@ -17,6 +16,7 @@
                 bodyInput: this.shadowRoot.querySelector('#body-input')
             }
             this.props.timeInput.addEventListener('change', (ev) => this.onTimeChange(ev));
+            this.props.toggleSwitch.addEventListener('change', ev => this.alarmSet(ev));
         }
 
         getState() {
@@ -59,7 +59,7 @@
         }
 
         alarmSet(ev) {
-            console.log('setting alarm...');
+            console.log('setting alarm...', ev.target.checked);
             // if (ev.detail.checked) {
             //     new Notification('Alarm', { body: 'An alarm has been set...' });
             //     const message = {
