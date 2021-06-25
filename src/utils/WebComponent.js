@@ -63,4 +63,8 @@ class WebComponent extends HTMLElement {
             clearInterval(timer);
         }, 1);
     }
+
+    get refId() {
+        return this.getAttribute('ref-id');
+    }
 }
