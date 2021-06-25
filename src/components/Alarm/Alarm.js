@@ -30,8 +30,10 @@
         }
 
         setState(state) {
-            const date = new Date(state.timeInput)
-            this.props.timeInput.value = `${date.getHours()}:${date.getMinutes()}`;
+            const date = new Date(parseInt(state.timeInput));
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0')
+            this.props.timeInput.value = `${hours}:${minutes}`;
             this.props.toggleSwitch.onShadowRootReady(() => {
                 this.props.toggleSwitch.setChecked(state.toggleSwitch);
             });
