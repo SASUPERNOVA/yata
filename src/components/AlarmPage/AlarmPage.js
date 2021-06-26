@@ -1,6 +1,6 @@
 (() => {
     class AlarmPage extends WebComponent {
-        static alarms = {};
+        static alarms = [];
         static initialized = false;
         constructor() {
             super('components/AlarmPage/AlarmPage.html', 'alarm-page');
@@ -11,8 +11,8 @@
             this.addEventListener('addbutton-click', (ev) => this.onAddButtonClick(ev));
             this.addEventListener('timer-finished', ev => this.onTimerFinished(ev));
             this.addEventListener('data-received', ev => this.onDataReceived(ev));
-            for (const alarm of Object.values(AlarmPage.alarms)) {
-                this.shadowRoot.querySelector('main').appendChild(alarm.component);
+            for (const alarm of AlarmPage.alarms) {
+                this.shadowRoot.querySelector('main').appendChild(alarm);
             }
             if (!AlarmPage.initialized) {
                 yanuAPI.loadFile('AlarmPage.json');
@@ -22,14 +22,8 @@
 
         onAddButtonClick(ev) {
             const alarmComponent = document.createElement('alarm-component');
-            //AlarmPage.alarms.push(alarmComponent);
+            AlarmPage.alarms.push(alarmComponent);
             this.shadowRoot.querySelector('main').appendChild(alarmComponent);
-            alarmComponent.onShadowRootReady(() => {
-                AlarmPage.alarms[alarmComponent.refId] = {
-                    component: alarmComponent,
-                    state: alarmComponent.getState()
-                };
-            });
             alarmComponent.addEventListener('input', ev => this.onChildInput(ev));
         }
 
@@ -41,22 +35,29 @@
             const data = ev.detail.data;
             for (const item of data) {
                 const alarmComponent = document.createElement('alarm-component');
-                //AlarmPage.alarms.push(alarmComponent);
+                AlarmPage.alarms.push(alarmComponent);
                 this.shadowRoot.querySelector('main').appendChild(alarmComponent);
                 alarmComponent.onShadowRootReady(() => {
-                    alarmComponent.setState(item.alarm);
-                    AlarmPage.alarms[alarmComponent.refId] = {
-                        component: alarmComponent,
-                        state: alarmComponent.getState()
-                    };
+                    alarmComponent.setState(item);
                 });
                 alarmComponent.addEventListener('input', ev => this.onChildInput(ev));
             }
         }
 
         onChildInput(ev) {
-            AlarmPage.alarms[ev.target.refId].state = ev.target.getState();
-            console.log(AlarmPage.alarms);
+            const save = () => {
+                const children = Array.from(this.shadowRoot.querySelector('main').children);
+                yanuAPI.saveFile('AlarmPage.json', {data: Array.from(children).map(alarm => alarm.getState())});
+                delete this.isTyping;
+            }
+
+            if (!this.isTyping) {
+                this.isTyping = setTimeout(save, 2000);
+            }
+            else {
+                clearTimeout(this.isTyping);
+                this.isTyping = setTimeout(save, 2000);
+            }
         }
     }
 
