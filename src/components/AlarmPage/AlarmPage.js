@@ -28,7 +28,7 @@
         }
 
         onTimerFinished(ev) {
-            console.log(ev.detail);
+            this.shadowRoot.querySelector(`alarm-component[ref-id="${ev.detail}"]`).dispatchEvent(new CustomEvent('ring-alarm'));
         }
 
         onDataReceived(ev) {
