@@ -22,7 +22,7 @@
         getState() {
             return {
                 timeInput: this.props.timeInput.value,
-                toggleSwitch: this.props.toggleSwitch.value,
+                toggleSwitch: this.props.toggleSwitch.checked,
                 soundInput: this.props.soundInput.value,
                 titleInput: this.props.titleInput.value,
                 bodyInput: this.props.bodyInput.value
