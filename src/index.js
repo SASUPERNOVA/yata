@@ -50,7 +50,7 @@ app.on('activate', () => {
 // code. You can also put them in separate files and import them here.
 
 ipcMain.on('save-file', (event, fileName, data) => {
-  fs.writeFile(path.join(__dirname, fileName), JSON.stringify(data), (err) => {
+  fs.writeFile(path.join(__dirname, fileName), JSON.stringify(data, null, ' '), (err) => {
     if (err) {
       event.sender.send('save-failed', err);
     }
