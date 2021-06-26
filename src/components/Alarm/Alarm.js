@@ -43,31 +43,22 @@
             });
             this.props.titleInput.value = state.titleInput;
             this.props.bodyInput.value = state.bodyInput;
+            if (state.toggleSwitch) {
+                this.setTimer();
+            }
         }
 
         onTimeChange(ev) {
             if (!this.props.toggleSwitch.getAttribute('checked')) {
                 return;
             }
-            let date = this.getDate();
-            const message = {
-                time: date.getTime(),
-                page: this.hostComponent(),
-                refId: this.getAttribute('ref-id')
-            }
-            document.dispatchEvent(new CustomEvent('set-timer', {detail: message}));
+            this.setTimer();
         }
 
         alarmSet(ev) {
             if (ev.target.checked) {
                 new Notification('Alarm', { body: 'An alarm has been set...' });
-                let date = this.getDate();
-                const message = {
-                    time: date.getTime(),
-                    page: this.hostComponent(),
-                    refId: this.getAttribute('ref-id')
-                }
-                document.dispatchEvent(new CustomEvent('set-timer', {detail: message}));
+                this.setTimer();
             }
             else {
                 new Notification('Alarm', { body: 'An alarm has been disabled...' });
@@ -76,6 +67,16 @@
 
         deleteClick(ev) {
             this.remove();
+        }
+
+        setTimer() {
+            let date = this.getDate();
+            const message = {
+                time: date.getTime(),
+                page: this.hostComponent(),
+                refId: this.getAttribute('ref-id')
+            }
+            document.dispatchEvent(new CustomEvent('set-timer', {detail: message}));
         }
 
         getDate() {
