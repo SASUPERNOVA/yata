@@ -53,6 +53,7 @@
             let date = new Date();
             date.setHours(time[0]);
             date.setMinutes(time[1]);
+            date.setSeconds(0);
             const message = {
                 time: date.getTime(),
                 page: this.hostComponent(),
@@ -64,6 +65,11 @@
         alarmSet(ev) {
             if (ev.target.checked) {
                 new Notification('Alarm', { body: 'An alarm has been set...' });
+                let time = this.props.timeInput.value.split(':');
+                let date = new Date();
+                date.setHours(time[0]);
+                date.setMinutes(time[1]);
+                date.setSeconds(0);
                 const message = {
                     time: date.getTime(),
                     page: this.hostComponent(),
