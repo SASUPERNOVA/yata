@@ -21,7 +21,7 @@
 
         getState() {
             return {
-                timeInput: this.props.timeInput.value,
+                timeInput: this.getDate().getTime(),
                 toggleSwitch: this.props.toggleSwitch.checked,
                 soundInput: this.props.soundInput.value,
                 titleInput: this.props.titleInput.value,
@@ -30,7 +30,7 @@
         }
 
         setState(state) {
-            const date = new Date(parseInt(state.timeInput));
+            const date = new Date(state.timeInput);
             const hours = date.getHours().toString().padStart(2, '0');
             const minutes = date.getMinutes().toString().padStart(2, '0')
             this.props.timeInput.value = `${hours}:${minutes}`;
@@ -49,11 +49,7 @@
             if (!this.props.toggleSwitch.getAttribute('checked')) {
                 return;
             }
-            let time = ev.target.value.split(':');
-            let date = new Date();
-            date.setHours(time[0]);
-            date.setMinutes(time[1]);
-            date.setSeconds(0);
+            let date = this.getDate();
             const message = {
                 time: date.getTime(),
                 page: this.hostComponent(),
@@ -65,11 +61,7 @@
         alarmSet(ev) {
             if (ev.target.checked) {
                 new Notification('Alarm', { body: 'An alarm has been set...' });
-                let time = this.props.timeInput.value.split(':');
-                let date = new Date();
-                date.setHours(time[0]);
-                date.setMinutes(time[1]);
-                date.setSeconds(0);
+                let date = this.getDate();
                 const message = {
                     time: date.getTime(),
                     page: this.hostComponent(),
@@ -84,6 +76,16 @@
 
         deleteClick(ev) {
             this.remove();
+        }
+
+        getDate() {
+            const time = this.props.timeInput.value.split(':');
+            const date = new Date();
+            date.setHours(time[0]);
+            date.setMinutes(time[1]);
+            date.setSeconds(0);
+            
+            return date;
         }
     }
 
