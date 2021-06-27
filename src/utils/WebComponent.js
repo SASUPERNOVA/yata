@@ -1,18 +1,16 @@
 class WebComponent extends HTMLElement {
-    constructor(path, name, templateID) {
+    constructor(path, templateId) {
         super();
         this.path = path;
-        this.name = name;
-        this.templateID = templateID || name;
+        this.templateId = templateId;
     }
 
-    async _loadTemplateFile(path, name, templateID) {
-        templateID = templateID || name;
+    async _loadTemplateFile() {
         const parser = new DOMParser();
-        const htmlFile = await (await fetch(path)).text();
+        const htmlFile = await (await fetch(this.path)).text();
         const vPage = parser.parseFromString(htmlFile, 'text/html');
     
-        const template = vPage.getElementById(templateID);
+        const template = vPage.getElementById(this.templateId);
         const templateContent = template.content;
         const styles = vPage.querySelectorAll('link');
     
@@ -20,7 +18,7 @@ class WebComponent extends HTMLElement {
     }
 
     async _initComponent() {
-        let { templateContent, styles } = await this._loadTemplateFile(this.path, this.name, this.templateID);
+        let { templateContent, styles } = await this._loadTemplateFile();
         const shadowRoot = this.attachShadow({ mode: 'open' });
         for (const style of styles) {
             shadowRoot.appendChild(style.cloneNode(false));
