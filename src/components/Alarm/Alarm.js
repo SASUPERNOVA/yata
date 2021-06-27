@@ -22,8 +22,15 @@
 
         onRingAlarm(ev) {
             const timeDiff = new Date().getTime() - this.getDate().getTime();
-            if (timeDiff < 60000) {
+            if (timeDiff < 60000 && !this.modal) {
                 new Notification('Alarm', { body: 'Be alarmed!!!' });
+                this.modal = document.createElement('alarm-modal');
+                const body = document.querySelector('body')
+                body.appendChild(this.modal);
+                this.modal.addEventListener('close', () => {
+                    body.removeChild(this.modal);
+                    delete this.modal;
+                });
             }
         }
 
