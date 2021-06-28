@@ -81,7 +81,9 @@
         }
 
         deleteClick(ev) {
+            const host = this.hostComponent();
             this.remove();
+            host.dispatchEvent(new CustomEvent('child-removed'));
         }
 
         setTimer() {

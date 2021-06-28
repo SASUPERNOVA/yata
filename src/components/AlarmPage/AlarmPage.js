@@ -11,6 +11,11 @@
             this.addEventListener('addbutton-click', (ev) => this.onAddButtonClick(ev));
             this.addEventListener('timer-finished', ev => this.onTimerFinished(ev));
             this.addEventListener('data-received', ev => this.onDataReceived(ev));
+            this.addEventListener('child-removed', ev => {
+                console.log('removing...');
+                const children = Array.from(this.shadowRoot.querySelector('main').children);
+                yanuAPI.saveFile('AlarmPage.json', {data: Array.from(children).map(alarm => alarm.getState())});
+            });
             for (const alarm of AlarmPage.alarms) {
                 this.shadowRoot.querySelector('main').appendChild(alarm);
             }
