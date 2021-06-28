@@ -11,11 +11,7 @@
             this.addEventListener('addbutton-click', (ev) => this.onAddButtonClick(ev));
             this.addEventListener('timer-finished', ev => this.onTimerFinished(ev));
             this.addEventListener('data-received', ev => this.onDataReceived(ev));
-            this.addEventListener('child-removed', ev => {
-                console.log('removing...');
-                const children = Array.from(this.shadowRoot.querySelector('main').children);
-                yanuAPI.saveFile('AlarmPage.json', {data: Array.from(children).map(alarm => alarm.getState())});
-            });
+            this.addEventListener('child-removed', _ev => this.saveAlarms());
             for (const alarm of AlarmPage.alarms) {
                 this.shadowRoot.querySelector('main').appendChild(alarm);
             }
@@ -30,6 +26,7 @@
             AlarmPage.alarms.push(alarmComponent);
             this.shadowRoot.querySelector('main').appendChild(alarmComponent);
             alarmComponent.addEventListener('input', ev => this.onChildInput(ev));
+            alarmComponent.onShadowRootReady(() => this.saveAlarms());
         }
 
         onTimerFinished(ev) {
@@ -51,8 +48,7 @@
 
         onChildInput(ev) {
             const save = () => {
-                const children = Array.from(this.shadowRoot.querySelector('main').children);
-                yanuAPI.saveFile('AlarmPage.json', {data: Array.from(children).map(alarm => alarm.getState())});
+                this.saveAlarms();
                 delete this.isTyping;
             }
 
@@ -63,6 +59,11 @@
                 clearTimeout(this.isTyping);
                 this.isTyping = setTimeout(save, 2000);
             }
+        }
+
+        saveAlarms() {
+            const children = Array.from(this.shadowRoot.querySelector('main').children);
+            yanuAPI.saveFile('AlarmPage.json', {data: Array.from(children).map(alarm => alarm.getState())});
         }
     }
 
