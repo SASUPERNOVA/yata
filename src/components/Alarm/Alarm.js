@@ -18,20 +18,29 @@
             this.props.timeInput.addEventListener('change', (ev) => this.onTimeChange(ev));
             this.props.toggleSwitch.addEventListener('change', ev => this.alarmSet(ev));
             this.props.soundInput.addEventListener('input', ev => this.dispatchEvent(new Event('input')));
-            this.addEventListener('ring-alarm', ev => this.onRingAlarm(ev));
+            this.addEventListener('ring-alarm', async (ev) => this.onRingAlarm(ev));
         }
 
-        onRingAlarm(ev) {
+        async onRingAlarm(ev) {
             const timeDiff = new Date().getTime() - this.getDate().getTime();
             if (timeDiff < 60000 && !this.modal) {
-                new Notification('Alarm', { body: 'Be alarmed!!!' });
-                this.modal = document.createElement('alarm-modal');
-                const body = document.querySelector('body')
-                body.appendChild(this.modal);
-                this.modal.addEventListener('close', () => {
-                    body.removeChild(this.modal);
-                    delete this.modal;
-                });
+                document.dispatchEvent(new CustomEvent('pause-timer'));
+                if (this.props.bodyInput || this.props.bodyInput) {
+                    new Notification(this.props.titleInput.value, { body: this.props.bodyInput.value });
+                }
+                if (this.props.soundInput.value) {
+                    this.modal = document.createElement('alarm-modal');
+                    const body = document.querySelector('body');
+                    body.appendChild(this.modal);
+                    const audio = new Audio(this.props.soundInput.value);
+                    audio.play();
+                    this.modal.addEventListener('close', () => {
+                        body.removeChild(this.modal);
+                        audio.pause();
+                        delete this.modal;
+                        document.dispatchEvent(new Event('resume-timer'));
+                    });
+                }
             }
         }
 
