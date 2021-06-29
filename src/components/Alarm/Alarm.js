@@ -17,6 +17,7 @@
             }
             this.props.timeInput.addEventListener('change', (ev) => this.onTimeChange(ev));
             this.props.toggleSwitch.addEventListener('change', ev => this.alarmSet(ev));
+            this.props.soundInput.addEventListener('input', ev => this.dispatchEvent(new Event('input')));
             this.addEventListener('ring-alarm', ev => this.onRingAlarm(ev));
         }
 
@@ -54,7 +55,8 @@
             });
             this.props.soundInput.onShadowRootReady(() => {
                 this.props.soundInput.value = state.soundInput;
-                this.props.soundInput.setAccept('audio/*');
+                const extensions = ['wav', 'mp3', 'mp4', 'aac', 'ogg', 'webm', 'caf', 'flac'];
+                this.props.soundInput.setOptions({filters: [{name: 'Audio Files', extensions: extensions}, {name: 'All Files', extensions: ['*']}]});
             });
             this.props.titleInput.value = state.titleInput;
             this.props.bodyInput.value = state.bodyInput;

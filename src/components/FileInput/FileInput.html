@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css/global.css">
 <link rel="stylesheet" href="components/FileInput/FileInput.css">
 <template id="file-input">
-    <label id="sound-input-label" for="sound-input"><slot>Browse file...</slot></label>
-    <input id="sound-input" name="sound" type="file">
+    <button id="file-browser"><slot>Browse file...</slot></button>
+    <span id="file-display"></span>
 </template>

@@ -2,26 +2,38 @@
     class FileInput extends WebComponent {
         constructor() {
             super('components/FileInput/FileInput.html', 'file-input');
-            this.value = '';
+            this.options = undefined;
         }
 
         async connectedCallback() {
             await super.connectedCallback();
-            this.shadowRoot.querySelector('#sound-input').addEventListener('change', ev => this.change(ev));
-            this.shadowRoot.querySelector('#sound-input').addEventListener('input', ev => this.input(ev));
+            this.props = {
+                fileBrowser: this.shadowRoot.querySelector('#file-browser'),
+                fileDisplay: this.shadowRoot.querySelector('#file-display')
+            }
+            this.props.fileBrowser.addEventListener('click', async (ev) => this.onFileBrowserClick(ev));
         }
 
-        change(ev) {
-            this.value = ev.target.value;
-            this.dispatchEvent(new Event('change'));
+        async onFileBrowserClick(ev) {
+            const files = await yanuAPI.openFileDialog(this.options);
+            if (files) {
+                this.value = files[0];
+                this.props.fileDisplay.textContent = this.value;
+                this.dispatchEvent(new Event('input'));
+                this.dispatchEvent(new Event('change'));
+            }
         }
 
-        input(ev) {
-            this.dispatchEvent(new Event('input'));
+        set value(value) {
+            this.props.fileDisplay.textContent = value;
         }
 
-        setAccept(accept) {
-            this.shadowRoot.querySelector('#sound-input').setAttribute('accept', accept);
+        get value() {
+            return this.props.fileDisplay.textContent;
+        }
+
+        setOptions(options) {
+            this.options = options;
         }
     }
 
