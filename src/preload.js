@@ -2,9 +2,6 @@ const { contextBridge, ipcRenderer } = require('electron');
 require('./notify-preload');
 
 contextBridge.exposeInMainWorld('yanuAPI', {
-    dummy: () => {
-        console.log('I am a dummy');
-    },
     saveFile: (fileName, data) => {
         ipcRenderer.send('save-file', fileName, data);
     },
