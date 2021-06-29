@@ -1,4 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron');
+require('./notify-preload');
 
 contextBridge.exposeInMainWorld('yanuAPI', {
     dummy: () => {

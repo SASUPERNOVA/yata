@@ -96,3 +96,9 @@ class PriorityQueue {
         return minKey;
     }
 }
+
+if (typeof module != 'undefined') {
+    module.exports= {
+        PriorityQueue
+    };
+}
