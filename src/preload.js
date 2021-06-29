@@ -9,6 +9,10 @@ contextBridge.exposeInMainWorld('yanuAPI', {
     },
     loadFile: (fileName) => {
         ipcRenderer.send('load-file', fileName);
+    },
+    openFileDialog: async (options) => {
+        let files = await ipcRenderer.invoke('file-dialog-open', options);
+        return files;
     }
 });
 

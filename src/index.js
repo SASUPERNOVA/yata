@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -66,4 +66,11 @@ ipcMain.on('load-file', (event, fileName) => {
       event.sender.send('load-success', JSON.parse(data));
     }
   });
+});
+
+ipcMain.handle('file-dialog-open', async (event, options) => {
+  const fileDialog = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow(), options);
+  if (!fileDialog.canceled) {
+    return fileDialog.filePaths;
+  }
 });
