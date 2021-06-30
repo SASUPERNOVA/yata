@@ -29,7 +29,10 @@
         }
 
         get value() {
-            return this.props.fileDisplay.textContent;
+            if (this.props) {
+                return this.props.fileDisplay.textContent;
+            }
+            return '';
         }
 
         setOptions(options) {
