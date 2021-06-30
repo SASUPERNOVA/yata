@@ -1,4 +1,4 @@
-const { PriorityQueue } = require('./utils/priority-queue');
+const { PriorityQueue } = require('../utils/priority-queue');
 const { contextBridge } = require('electron');
 
 let timerQueue = new PriorityQueue();
