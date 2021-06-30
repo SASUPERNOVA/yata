@@ -16,7 +16,7 @@
                 this.shadowRoot.querySelector('main').appendChild(alarm);
             }
             if (!AlarmPage.initialized) {
-                yanuAPI.loadFile('AlarmPage.json');
+                fsAPI.loadFile('AlarmPage.json');
                 AlarmPage.initialized = true;
             }
         }
@@ -63,7 +63,7 @@
 
         saveAlarms() {
             const children = Array.from(this.shadowRoot.querySelector('main').children);
-            yanuAPI.saveFile('AlarmPage.json', {data: Array.from(children).map(alarm => alarm.getState())});
+            fsAPI.saveFile('AlarmPage.json', {data: Array.from(children).map(alarm => alarm.getState())});
         }
     }
 

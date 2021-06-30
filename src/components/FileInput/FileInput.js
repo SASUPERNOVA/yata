@@ -15,7 +15,7 @@
         }
 
         async onFileBrowserClick(ev) {
-            const files = await yanuAPI.openFileDialog(this.options);
+            const files = await fsAPI.openFileDialog(this.options);
             if (files) {
                 this.value = files[0];
                 this.props.fileDisplay.textContent = this.value;

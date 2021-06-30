@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-contextBridge.exposeInMainWorld('yanuAPI', {
+contextBridge.exposeInMainWorld('fsAPI', {
     saveFile: (fileName, data) => {
         ipcRenderer.send('save-file', fileName, data);
     },
