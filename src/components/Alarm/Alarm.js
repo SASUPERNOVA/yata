@@ -83,11 +83,7 @@
 
         alarmSet(ev) {
             if (ev.target.checked) {
-                new Notification('Alarm', { body: 'An alarm has been set...' });
                 this.setTimer();
-            }
-            else {
-                new Notification('Alarm', { body: 'An alarm has been disabled...' });
             }
         }
 
