@@ -8,7 +8,7 @@
 
         async connectedCallback() {
             await super.connectedCallback();
-            this.addEventListener('addbutton-click', (ev) => this.onAddButtonClick(ev));
+            this.shadowRoot.querySelector('add-button').addEventListener('addbutton-click', (ev) => this.onAddButtonClick(ev));
             this.addEventListener('timer-finished', ev => this.onTimerFinished(ev));
             this.addEventListener('data-received', ev => this.onDataReceived(ev));
             this.addEventListener('child-removed', _ev => this.saveAlarms());

@@ -6,11 +6,11 @@
 
         async connectedCallback() {
             await super.connectedCallback();
-            this.shadowRoot.querySelector('#add').addEventListener('click', (ev) => this.click(ev));
+            this.shadowRoot.querySelector('#add-btn').addEventListener('click', (ev) => this.click(ev));
         }
 
         click(ev) {
-            this.hostComponent().dispatchEvent(new CustomEvent('addbutton-click'));
+            this.dispatchEvent(new CustomEvent('addbutton-click'));
         }
     }
 
