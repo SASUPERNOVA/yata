@@ -8,7 +8,7 @@ let pauseRef = null;
 const pollQueue = () => {
     let time = new Date();
 
-    if (time >= timerQueue.minKey) {
+    if (time.getTime() >= timerQueue.minKey) {
         let refId = timerQueue.getFront();
         refIds[refId].page.dispatchEvent(new CustomEvent('timer-finished', {detail: refId}));
     }
@@ -25,14 +25,14 @@ contextBridge.exposeInMainWorld('timerAPI', {
         timerQueue.put(refId, time);
         refIds[refId] = {time, page};
     },
-    pauseTimer: () => {
+    pauseTimer: (target) => {
         if (!pauseRef) {
-            pauseRef = ev.target;
+            pauseRef = target;
             clearInterval(timer);
         }
     },
-    resumeTimer: () => {
-        if (pauseRef == ev.target) {
+    resumeTimer: (target) => {
+        if (pauseRef == target) {
             pauseRef = null;
             timer = setInterval(pollQueue, 1000);
         }
