@@ -25,7 +25,7 @@
             const timeDiff = new Date().getTime() - this.getDate().getTime();
             if (timeDiff < 60000 && !this.modal) {
                 timerAPI.pauseTimer();
-                if (this.props.bodyInput || this.props.bodyInput) {
+                if (this.props.bodyInput.value || this.props.bodyInput.value) {
                     new Notification(this.props.titleInput.value, { body: this.props.bodyInput.value });
                 }
                 if (this.props.soundInput.value) {
