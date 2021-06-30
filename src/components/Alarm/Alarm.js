@@ -60,7 +60,7 @@
             const minutes = date.getMinutes().toString().padStart(2, '0')
             this.props.timeInput.value = `${hours}:${minutes}`;
             this.props.toggleSwitch.onShadowRootReady(() => {
-                this.props.toggleSwitch.setChecked(state.toggleSwitch);
+                this.props.toggleSwitch.checked = state.toggleSwitch;
             });
             this.props.soundInput.onShadowRootReady(() => {
                 this.props.soundInput.value = state.soundInput;
