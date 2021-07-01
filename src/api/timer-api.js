@@ -17,7 +17,7 @@ const pollQueue = () => {
 let timer = setInterval(pollQueue, 1000);
 
 contextBridge.exposeInMainWorld('timerAPI', {
-    setTimer: (message) => {
+    addTimer: (message) => {
         const { time, page, refId } = message;
         if (refIds[refId]) {
             timerQueue.remove(refId, refIds[refId].time);
@@ -29,13 +29,13 @@ contextBridge.exposeInMainWorld('timerAPI', {
         timerQueue.remove(refId, refIds[refId].time);
         delete refIds[refId];
     },
-    pauseTimer: (target) => {
+    pauseClock: (target) => {
         if (!pauseRef) {
             pauseRef = target;
             clearInterval(timer);
         }
     },
-    resumeTimer: (target) => {
+    resumeClock: (target) => {
         if (pauseRef == target) {
             pauseRef = null;
             timer = setInterval(pollQueue, 1000);

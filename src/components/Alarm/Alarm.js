@@ -24,7 +24,7 @@
         async onRingAlarm(ev) {
             const timeDiff = new Date().getTime() - this.getDate().getTime();
             if (timeDiff < 60000 && !this.modal) {
-                timerAPI.pauseTimer();
+                timerAPI.pauseClock();
                 if (this.props.bodyInput.value || this.props.bodyInput.value) {
                     new Notification(this.props.titleInput.value, { body: this.props.bodyInput.value });
                 }
@@ -38,7 +38,7 @@
                         body.removeChild(this.modal);
                         audio.pause();
                         delete this.modal;
-                        timerAPI.resumeTimer();
+                        timerAPI.resumeClock();
                     });
                 }
             }
@@ -103,7 +103,7 @@
                 page: this.hostComponent(),
                 refId: this.getAttribute('ref-id')
             }
-            timerAPI.setTimer(message);
+            timerAPI.addTimer(message);
         }
 
         getDate() {
