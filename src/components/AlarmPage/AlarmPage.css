@@ -2,6 +2,7 @@ main {
     color: white;
     height: 100%;
     background-color: #202020;
+    padding-bottom: 2.5rem;
 }
 
 footer {
@@ -10,4 +11,9 @@ footer {
     width: 100%;
     position: fixed;
     bottom: 0.2rem;
+    pointer-events: none;
+}
+
+footer * {
+    pointer-events: all;
 }
