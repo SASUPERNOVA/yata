@@ -25,6 +25,10 @@ contextBridge.exposeInMainWorld('timerAPI', {
         timerQueue.put(refId, time);
         refIds[refId] = {time, page};
     },
+    removeTimer: (refId) => {
+        timerQueue.remove(refId, refIds[refId].time);
+        delete refIds[refId];
+    },
     pauseTimer: (target) => {
         if (!pauseRef) {
             pauseRef = target;

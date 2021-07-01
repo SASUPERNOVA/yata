@@ -85,6 +85,9 @@
             if (ev.target.checked) {
                 this.setTimer();
             }
+            else {
+                timerAPI.removeTimer(this.refId);
+            }
         }
 
         deleteClick(ev) {
