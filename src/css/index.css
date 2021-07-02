@@ -12,13 +12,12 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-#app {
-  display: grid;
-  grid-template-rows: 2.5rem auto;
-}
-
 header {
   background-color: #404040;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 header button {
@@ -40,6 +39,7 @@ header button:hover:not(.active) {
 #page-view {
   padding-left: 0.2rem;
   padding-right: 0.2rem;
+  padding-top: 2.5rem;
 }
 
 #page-view * {
