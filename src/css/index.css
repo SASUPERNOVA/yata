@@ -41,3 +41,11 @@ header button:hover:not(.active) {
   padding-left: 0.2rem;
   padding-right: 0.2rem;
 }
+
+#page-view * {
+  display: none;
+}
+
+#page-view .active-page {
+  display: initial;
+}

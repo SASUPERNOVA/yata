@@ -4,8 +4,14 @@ contextBridge.exposeInMainWorld('fsAPI', {
     saveFile: (fileName, data) => {
         ipcRenderer.send('save-file', fileName, data);
     },
-    loadFile: (fileName) => {
-        ipcRenderer.send('load-file', fileName);
+    loadFile: async (fileName) => {
+        try {
+            const data = await ipcRenderer.invoke('load-file', fileName);
+            return data;
+        }
+        catch (err) {
+            console.log(err);
+        }
     },
     openFileDialog: async (options) => {
         let files = await ipcRenderer.invoke('file-dialog-open', options);
@@ -15,12 +21,4 @@ contextBridge.exposeInMainWorld('fsAPI', {
 
 ipcRenderer.on('save-failed', (event, err) => {
     console.log(err);
-});
-
-ipcRenderer.on('load-failed', (event, err) => {
-    console.log(err);
-});
-
-ipcRenderer.on('load-success', (event, data) => {
-    document.dispatchEvent(new CustomEvent('data-received', {detail: data}));
 });

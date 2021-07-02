@@ -10,14 +10,15 @@
             await super.connectedCallback();
             this.shadowRoot.querySelector('add-button').addEventListener('addbutton-click', (ev) => this.onAddButtonClick(ev));
             this.addEventListener('timer-finished', ev => this.onTimerFinished(ev));
-            this.addEventListener('data-received', ev => this.onDataReceived(ev));
             this.addEventListener('child-removed', _ev => this.saveAlarms());
             for (const alarm of AlarmPage.alarms) {
                 this.shadowRoot.querySelector('main').appendChild(alarm);
             }
             if (!AlarmPage.initialized) {
-                fsAPI.loadFile('AlarmPage.json');
-                AlarmPage.initialized = true;
+                const file = await fsAPI.loadFile('AlarmPage.json');
+                if (file) {
+                    this.initialize(file.data);
+                }
             }
         }
 
@@ -33,8 +34,7 @@
             this.shadowRoot.querySelector(`alarm-component[ref-id="${ev.detail}"]`).dispatchEvent(new CustomEvent('ring-alarm'));
         }
 
-        onDataReceived(ev) {
-            const data = ev.detail.data;
+        initialize(data) {
             for (const item of data) {
                 const alarmComponent = document.createElement('alarm-component');
                 AlarmPage.alarms.push(alarmComponent);
@@ -44,6 +44,7 @@
                 });
                 alarmComponent.addEventListener('input', ev => this.onChildInput(ev));
             }
+            AlarmPage.initialized = true;
         }
 
         onChildInput(ev) {

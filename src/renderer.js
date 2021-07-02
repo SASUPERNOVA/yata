@@ -1,21 +1,18 @@
 (() => {
-    const tabs = {
-        alarms: "alarm-page",
-        reminders: "reminder-page"
-    }
+    const tabs = Array.from(document.querySelector('header').children);
+    const pages = Array.from(document.querySelector('#page-view').children);
+    const groups = tabs.map((tab, idx) => {
+        return [tab.id, pages[idx].tagName];
+    });
 
-    for (const [key, val] of Object.entries(tabs)) {
+    for (const [key, val] of groups) {
         const tab = document.getElementById(key);
+        const page = document.querySelector(val);
         tab.addEventListener('click', () => {
-            document.querySelector('header .active').classList.remove('active');
+            document.querySelector('.active').classList.remove('active');
             tab.classList.add('active');
-            const currentPage = document.createElement(val);
-            document.getElementById('page-view').firstElementChild.replaceWith(currentPage);
+            document.querySelector('.active-page').classList.remove('active-page');
+            page.classList.add('active-page');
         });
     }
-
-    document.addEventListener('data-received', ev => {
-        const data = ev.detail;
-        document.querySelector('#page-view').firstElementChild.dispatchEvent(new CustomEvent('data-received', {detail: data}));
-    });
 })();

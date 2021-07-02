@@ -57,15 +57,14 @@ ipcMain.on('save-file', (event, fileName, data) => {
   });
 });
 
-ipcMain.on('load-file', (event, fileName) => {
-  fs.readFile(path.join(__dirname, fileName), (err, data) => {
-    if (err) {
-      event.sender.send('load-failed', err);
-    }
-    else {
-      event.sender.send('load-success', JSON.parse(data));
-    }
-  });
+ipcMain.handle('load-file', async (event, fileName) => {
+  try {
+    const data = await fs.promises.readFile(path.join(__dirname, fileName));
+    return JSON.parse(data);
+  }
+  catch (err) {
+    throw err;
+  }
 });
 
 ipcMain.handle('file-dialog-open', async (event, options) => {
