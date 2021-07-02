@@ -1,7 +1,5 @@
 (() => {
     class AlarmPage extends WebComponent {
-        static alarms = [];
-        static initialized = false;
         constructor() {
             super('components/AlarmPage/AlarmPage.html', 'alarm-page');
         }
@@ -11,20 +9,14 @@
             this.shadowRoot.querySelector('add-button').addEventListener('addbutton-click', (ev) => this.onAddButtonClick(ev));
             this.addEventListener('timer-finished', ev => this.onTimerFinished(ev));
             this.addEventListener('child-removed', _ev => this.saveAlarms());
-            for (const alarm of AlarmPage.alarms) {
-                this.shadowRoot.querySelector('main').appendChild(alarm);
-            }
-            if (!AlarmPage.initialized) {
-                const file = await fsAPI.loadFile('AlarmPage.json');
-                if (file) {
-                    this.initialize(file.data);
-                }
+            const file = await fsAPI.loadFile('AlarmPage.json');
+            if (file) {
+                this.initialize(file.data);
             }
         }
 
         onAddButtonClick(ev) {
             const alarmComponent = document.createElement('alarm-component');
-            AlarmPage.alarms.push(alarmComponent);
             this.shadowRoot.querySelector('main').appendChild(alarmComponent);
             alarmComponent.addEventListener('input', ev => this.onChildInput(ev));
             alarmComponent.onShadowRootReady(() => this.saveAlarms());
@@ -37,14 +29,12 @@
         initialize(data) {
             for (const item of data) {
                 const alarmComponent = document.createElement('alarm-component');
-                AlarmPage.alarms.push(alarmComponent);
                 this.shadowRoot.querySelector('main').appendChild(alarmComponent);
                 alarmComponent.onShadowRootReady(() => {
                     alarmComponent.setState(item);
                 });
                 alarmComponent.addEventListener('input', ev => this.onChildInput(ev));
             }
-            AlarmPage.initialized = true;
         }
 
         onChildInput(ev) {
