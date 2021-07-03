@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="components/Reminder/Reminder.css">
+<template id="reminder-component">
+    <input id="date-input" type="datetime-local">
+    <span>Repeat every:</span>
+    <input id="repeat-input" type="number" min="1" max="365">
+    <select id="repeat-type-input">
+        <option value="minutes">minutes</option>
+        <option value="hours">hours</option>
+        <option value="days">days</option>
+        <option value="weeks">weeks</option>
+        <option value="months">months</option>
+        <option value="years">years</option>
+    </select>
+    <hr>
+</template>
