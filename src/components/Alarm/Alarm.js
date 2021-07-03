@@ -33,6 +33,7 @@
                     const body = document.querySelector('body');
                     body.appendChild(this.modal);
                     const audio = new Audio(this.props.soundInput.value);
+                    audio.loop = true;
                     audio.play();
                     this.modal.addEventListener('close', () => {
                         body.removeChild(this.modal);
