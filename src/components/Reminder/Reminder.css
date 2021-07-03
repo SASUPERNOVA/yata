@@ -1,0 +1,16 @@
+#options {
+    display: grid;
+    gap: 0.3rem;
+}
+  
+#title-input {
+    display: block;
+}
+  
+#body-input {
+    display: block;
+}
+
+details {
+    user-select: none;
+}
