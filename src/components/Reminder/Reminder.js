@@ -51,7 +51,33 @@
         }
 
         onShowReminder(ev) {
-            new Notification(this.props.titleInput.value, { body: this.props.bodyInput.value });
+            const now = new Date();
+            const reminderTime = this.getDate()
+            const timeDiff = now.getTime() - reminderTime.getTime();
+            if (timeDiff < 86400000 && now.getDate() == reminderTime.getDate()) {
+                if (this.props.titleInput.value || this.props.bodyInput.value) {
+                    new Notification(this.props.titleInput.value, { body: this.props.bodyInput.value });
+                }
+                if (this.props.soundInput.value) {
+                    const audio = new Audio(this.props.soundInput.value);
+                    audio.play();
+                    const focusInterval = setInterval(() => {
+                        if (document.hasFocus()) {
+                            clearInterval(focusInterval);
+                        }
+                    }, 1);
+                }
+                if (this.props.repeatInput.value) {
+                    let next = new Date(this.getRepeat());
+                    next.setSeconds(0);
+                    next = new Date(next.getTime() - next.getTimezoneOffset() * 60000);
+                    this.props.datetimeInput.value = `${next.toISOString().substr(0, next.toISOString().lastIndexOf(':'))}`;
+                    this.dispatchEvent(new Event('input'));
+                    timerAPI.pauseClock();
+                    this.setTimer();
+                    timerAPI.resumeClock();
+                }
+            }
         }
 
         getState() {
@@ -78,8 +104,8 @@
                 const extensions = ['wav', 'mp3', 'mp4', 'aac', 'ogg', 'webm', 'caf', 'flac'];
                 this.props.soundInput.setOptions({filters: [{name: 'Audio Files', extensions: extensions}, {name: 'All Files', extensions: ['*']}]});
             });
-            this.props.repeatInput.value = state.repeatInput;
-            this.props.repeatInput.value = state.repeatTypeInput;
+            this.props.repeatInput.valueAsNumber = state.repeatInput;
+            this.props.repeatTypeInput.value = state.repeatTypeInput;
             this.props.titleInput.value = state.titleInput;
             this.props.bodyInput.value = state.bodyInput;
             if (state.toggleSwitch) {
@@ -103,6 +129,35 @@
                 refId: this.getAttribute('ref-id')
             }
             timerAPI.addTimer(message);
+        }
+
+        getRepeat() {
+            let now = new Date();
+            const repeatValue = this.props.repeatInput.valueAsNumber;
+            switch(this.props.repeatTypeInput.value) {
+                case 'minutes':
+                    console.log(now.getMinutes() + repeatValue);
+                    now.setMinutes(now.getMinutes() + repeatValue);
+                    break;
+                case 'hours':
+                    now.setHours(now.getHours() + repeatValue);
+                    break;
+                case 'days':
+                    now.setDate(now.getDate() + repeatValue);
+                    break;
+                case 'weeks':
+                    now.setDate(now.getDate() + repeatValue*7);
+                    break;
+                case 'months':
+                    now.setMonth(now.getMonth() + repeatValue);
+                    break;
+                case 'years':
+                    now.setFullYear(now.getFullYear() + repeatValue);
+                    break;
+                default:
+                    return NaN;
+            }
+            return now.getTime();
         }
     }
 
