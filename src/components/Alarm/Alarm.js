@@ -23,22 +23,22 @@
 
         async onRingAlarm(ev) {
             const timeDiff = new Date().getTime() - this.getDate().getTime();
-            if (timeDiff < 60000 && !this.modal) {
+            if (timeDiff < 60000 && !document.modal) {
                 timerAPI.pauseClock();
                 if (this.props.titleInput.value || this.props.bodyInput.value) {
                     new Notification(this.props.titleInput.value, { body: this.props.bodyInput.value });
                 }
                 if (this.props.soundInput.value) {
-                    this.modal = document.createElement('alarm-modal');
+                    document.modal = document.createElement('alarm-modal');
                     const body = document.querySelector('body');
-                    body.appendChild(this.modal);
+                    body.appendChild(document.modal);
                     const audio = new Audio(this.props.soundInput.value);
                     audio.loop = true;
                     audio.play();
-                    this.modal.addEventListener('close', () => {
-                        body.removeChild(this.modal);
+                    document.modal.addEventListener('close', () => {
+                        body.removeChild(document.modal);
                         audio.pause();
-                        delete this.modal;
+                        delete document.modal;
                         timerAPI.resumeClock();
                     });
                 }
