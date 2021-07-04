@@ -25,7 +25,7 @@
             const timeDiff = new Date().getTime() - this.getDate().getTime();
             if (timeDiff < 60000 && !this.modal) {
                 timerAPI.pauseClock();
-                if (this.props.bodyInput.value || this.props.bodyInput.value) {
+                if (this.props.titleInput.value || this.props.bodyInput.value) {
                     new Notification(this.props.titleInput.value, { body: this.props.bodyInput.value });
                 }
                 if (this.props.soundInput.value) {
@@ -110,9 +110,7 @@
         getDate() {
             const time = this.props.timeInput.value.split(':');
             const date = new Date();
-            date.setHours(time[0]);
-            date.setMinutes(time[1]);
-            date.setSeconds(0);
+            date.setHours(time[0], time[1], 0);
             
             return date;
         }
