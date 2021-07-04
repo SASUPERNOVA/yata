@@ -7,6 +7,7 @@
         async connectedCallback() {
             await super.connectedCallback();
             this.shadowRoot.querySelector('add-button').addEventListener('addbutton-click', (ev) => this.onAddButtonClick(ev));
+            this.addEventListener('timer-finished', ev => this.onTimerFinished(ev));
             this.addEventListener('child-removed', _ev => this.saveReminders());
             const file = await fsAPI.loadFile('ReminderPage.json');
             if (file) {
@@ -50,6 +51,10 @@
         saveReminders() {
             const children = Array.from(this.shadowRoot.querySelector('main').children);
             fsAPI.saveFile('ReminderPage.json', {data: Array.from(children).map(reminder => reminder.getState())});
+        }
+
+        onTimerFinished(ev) {
+            this.shadowRoot.querySelector(`reminder-component[ref-id="${ev.detail}"]`).dispatchEvent(new CustomEvent('show-reminder'));
         }
     }
 
