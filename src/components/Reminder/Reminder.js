@@ -41,12 +41,36 @@
 
         }
 
-        setState() {
-
+        getState() {
+            return {
+                datetimeInput: this.getDate().getTime(),
+                toggleSwitch: this.props.toggleSwitch.checked,
+                soundInput: this.props.soundInput.value,
+                repeatInput: this.props.repeatInput.valueAsNumber,
+                repeatTypeInput: this.props.repeatTypeInput.value,
+                titleInput: this.props.titleInput.value,
+                bodyInput: this.props.bodyInput.value
+            }
         }
 
-        getState() {
-
+        setState(state) {
+            const date = new Date(state.datetimeInput);
+            this.props.datetimeInput.value = `T${date.toISOString()}`;
+            this.props.toggleSwitch.onShadowRootReady(() => {
+                this.props.toggleSwitch.checked = state.toggleSwitch;
+            });
+            this.props.soundInput.onShadowRootReady(() => {
+                this.props.soundInput.value = state.soundInput;
+                const extensions = ['wav', 'mp3', 'mp4', 'aac', 'ogg', 'webm', 'caf', 'flac'];
+                this.props.soundInput.setOptions({filters: [{name: 'Audio Files', extensions: extensions}, {name: 'All Files', extensions: ['*']}]});
+            });
+            this.props.repeatInput.value = state.repeatInput;
+            this.props.repeatInput.value = state.repeatTypeInput;
+            this.props.titleInput.value = state.titleInput;
+            this.props.bodyInput.value = state.bodyInput;
+            if (state.toggleSwitch) {
+                this.setTimer();
+            }
         }
 
         getDate() {
