@@ -17,6 +17,7 @@
                 titleInput: this.shadowRoot.querySelector('#title-input'),
                 bodyInput: this.shadowRoot.querySelector('#body-input')
             }
+            this.initSoundInput();
             let date = new Date();
             date.setDate(date.getDate() + 1);
             date.setHours(0, 0, 0);
@@ -101,8 +102,7 @@
             });
             this.props.soundInput.onShadowRootReady(() => {
                 this.props.soundInput.value = state.soundInput;
-                const extensions = ['wav', 'mp3', 'mp4', 'aac', 'ogg', 'webm', 'caf', 'flac'];
-                this.props.soundInput.setOptions({filters: [{name: 'Audio Files', extensions: extensions}, {name: 'All Files', extensions: ['*']}]});
+                this.initSoundInput();
             });
             this.props.repeatInput.valueAsNumber = state.repeatInput;
             this.props.repeatTypeInput.value = state.repeatTypeInput;
@@ -158,6 +158,11 @@
                     return NaN;
             }
             return now.getTime();
+        }
+
+        initSoundInput() {
+            const extensions = ['wav', 'mp3', 'mp4', 'aac', 'ogg', 'webm', 'caf', 'flac'];
+            this.props.soundInput.setOptions({filters: [{name: 'Audio Files', extensions: extensions}, {name: 'All Files', extensions: ['*']}]});
         }
     }
 

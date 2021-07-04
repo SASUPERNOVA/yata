@@ -15,6 +15,7 @@
                 titleInput: this.shadowRoot.querySelector('#title-input'),
                 bodyInput: this.shadowRoot.querySelector('#body-input')
             }
+            this.initSoundInput();
             this.props.timeInput.addEventListener('change', (ev) => this.onTimeChange(ev));
             this.props.toggleSwitch.addEventListener('change', ev => this.alarmSet(ev));
             this.props.soundInput.addEventListener('input', ev => this.dispatchEvent(new Event('input')));
@@ -65,8 +66,7 @@
             });
             this.props.soundInput.onShadowRootReady(() => {
                 this.props.soundInput.value = state.soundInput;
-                const extensions = ['wav', 'mp3', 'mp4', 'aac', 'ogg', 'webm', 'caf', 'flac'];
-                this.props.soundInput.setOptions({filters: [{name: 'Audio Files', extensions: extensions}, {name: 'All Files', extensions: ['*']}]});
+                this.initSoundInput();
             });
             this.props.titleInput.value = state.titleInput;
             this.props.bodyInput.value = state.bodyInput;
@@ -113,6 +113,11 @@
             date.setHours(time[0], time[1], 0);
             
             return date;
+        }
+
+        initSoundInput() {
+            const extensions = ['wav', 'mp3', 'mp4', 'aac', 'ogg', 'webm', 'caf', 'flac'];
+            this.props.soundInput.setOptions({filters: [{name: 'Audio Files', extensions: extensions}, {name: 'All Files', extensions: ['*']}]});
         }
     }
 
