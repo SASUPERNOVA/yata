@@ -35,15 +35,23 @@
         }
 
         onDateTimeChange(ev) {
-
+            if (!this.props.toggleSwitch.checked) {
+                return;
+            }
+            this.setTimer();
         }
 
         reminderSet(ev) {
-
+            if (ev.target.checked) {
+                this.setTimer();
+            }
+            else {
+                timerAPI.removeTimer(this.refId);
+            }
         }
 
         onShowReminder(ev) {
-
+            new Notification(this.props.titleInput.value, { body: this.props.bodyInput.value });
         }
 
         getState() {
@@ -85,6 +93,16 @@
             date.setSeconds(0);
             
             return date;
+        }
+
+        setTimer() {
+            let date = this.getDate();
+            const message = {
+                time: date.getTime(),
+                page: this.hostComponent(),
+                refId: this.getAttribute('ref-id')
+            }
+            timerAPI.addTimer(message);
         }
     }
 
