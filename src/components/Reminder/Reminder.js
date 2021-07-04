@@ -17,6 +17,11 @@
                 titleInput: this.shadowRoot.querySelector('#title-input'),
                 bodyInput: this.shadowRoot.querySelector('#body-input')
             }
+            let date = new Date();
+            date.setDate(date.getDate() + 1);
+            date.setHours(0, 0, 0);
+            date = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+            this.props.datetimeInput.value = date.toISOString().substr(0, date.toISOString().lastIndexOf(':'));
             this.props.datetimeInput.addEventListener('change', (ev) => this.onDateTimeChange(ev));
             this.props.toggleSwitch.addEventListener('change', ev => this.reminderSet(ev));
             this.props.soundInput.addEventListener('input', ev => this.dispatchEvent(new Event('input')));
@@ -24,9 +29,9 @@
         }
 
         deleteClick(ev) {
-            //const host = this.hostComponent();
+            const host = this.hostComponent();
             this.remove();
-            //host.dispatchEvent(new CustomEvent('child-removed'));
+            host.dispatchEvent(new CustomEvent('child-removed'));
         }
 
         onDateTimeChange(ev) {
@@ -54,8 +59,9 @@
         }
 
         setState(state) {
-            const date = new Date(state.datetimeInput);
-            this.props.datetimeInput.value = `T${date.toISOString()}`;
+            let date = new Date(state.datetimeInput);
+            date = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+            this.props.datetimeInput.value = `${date.toISOString().substr(0, date.toISOString().lastIndexOf(':'))}`;
             this.props.toggleSwitch.onShadowRootReady(() => {
                 this.props.toggleSwitch.checked = state.toggleSwitch;
             });
