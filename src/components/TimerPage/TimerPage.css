@@ -1,0 +1,38 @@
+#timer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15rem;
+    height: 15rem;
+    border: 0.5rem solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input, p {
+    font-size: 2rem;
+    color: white;
+}
+
+input {
+    width: 2.2rem;
+    border: none;
+    background: none;
+    text-align: center;
+    caret-color: transparent;
+}
+
+p {
+    position: relative;
+    top: -2%;
+    user-select: none;
+}
