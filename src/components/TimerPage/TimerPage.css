@@ -36,3 +36,36 @@ p {
     top: -2%;
     user-select: none;
 }
+
+footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: fixed;
+    bottom: 10rem;
+}
+
+#timer-button {
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    border: none;
+}
+
+.play {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-width: 1.2rem 0rem 1.2rem 1.2rem;
+    border-color: transparent transparent transparent black;
+    border-style: solid;
+}
+
+.stop {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background-color: black;
+}

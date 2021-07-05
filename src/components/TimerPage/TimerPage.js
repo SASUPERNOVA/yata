@@ -17,6 +17,7 @@
             this.props.hoursInput.addEventListener('beforeinput', (ev) => this.onInput(ev));
             this.props.minutesInput.addEventListener('beforeinput', (ev) => this.onInput(ev));
             this.props.secondsInput.addEventListener('beforeinput', (ev) => this.onInput(ev));
+            this.shadowRoot.querySelector('#timer-button').addEventListener('click', (ev) => this.onTimerButtonClick(ev));
         }
 
         onInput(ev) {
@@ -49,6 +50,12 @@
 
         onFocus(ev) {
             ev.target.focused = true;
+        }
+
+        onTimerButtonClick(ev) {
+            const symbol = this.shadowRoot.querySelector('.play, .stop');
+            symbol.classList.toggle('play');
+            symbol.classList.toggle('stop');
         }
     }
 
