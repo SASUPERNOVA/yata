@@ -104,7 +104,7 @@
                 this.props.soundInput.value = state.soundInput;
                 this.initSoundInput();
             });
-            this.props.repeatInput.valueAsNumber = state.repeatInput;
+            this.props.repeatInput.value = state.repeatInput;
             this.props.repeatTypeInput.value = state.repeatTypeInput;
             this.props.titleInput.value = state.titleInput;
             this.props.bodyInput.value = state.bodyInput;
