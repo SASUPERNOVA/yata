@@ -58,9 +58,8 @@
 
         setState(state) {
             const date = new Date(state.timeInput);
-            const hours = date.getHours().toString().padStart(2, '0');
-            const minutes = date.getMinutes().toString().padStart(2, '0')
-            this.props.timeInput.value = `${hours}:${minutes}`;
+            const time = getFullTime(date);
+            this.props.timeInput.value = `${time.slice(0, time.lastIndexOf(':'))}`;
             this.props.toggleSwitch.onShadowRootReady(() => {
                 this.props.toggleSwitch.checked = state.toggleSwitch;
             });
@@ -109,8 +108,7 @@
 
         getDate() {
             const time = this.props.timeInput.value.split(':');
-            const date = new Date();
-            date.setHours(time[0], time[1], 0);
+            const date = dateFromTime({ hours: time[0], minutes: time[1]});
             
             return date;
         }
