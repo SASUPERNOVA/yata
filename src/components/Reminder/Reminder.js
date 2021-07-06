@@ -63,6 +63,7 @@
                     audio.play();
                     const focusInterval = setInterval(() => {
                         if (document.hasFocus()) {
+                            audio.pause();
                             clearInterval(focusInterval);
                         }
                     }, 1);
