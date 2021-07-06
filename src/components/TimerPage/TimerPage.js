@@ -26,7 +26,7 @@
             if (ev.inputType == 'deleteContentBackward') {
                 ev.target.value = ev.target.value.replace(/(?!0)/, '0');
             }
-            else if (!isNaN(ev.target.value) && !isNaN(parseFloat(ev.target.value))) {
+            else if (!isNaN(ev.data) && !isNaN(parseFloat(ev.data))) {
                 if (ev.target.focused) {
                     ev.target.value = `0${ev.data}`;
                     delete ev.target.focused;
@@ -62,9 +62,7 @@
                 const hours = this.props.hoursInput.valueAsNumber;
                 const minutes = this.props.minutesInput.valueAsNumber;
                 const seconds = this.props.secondsInput.valueAsNumber;
-                const timeout = new Date();
-                const start = {hours: timeout.getHours(), minutes: timeout.getMinutes(), seconds: timeout.getSeconds()};
-                timeout.setHours(start.hours + hours, start.minutes + minutes, start.seconds + seconds);
+                const timeout = addTime(new Date(), { hours, minutes, seconds });
                 const message = {
                     time: timeout,
                     page: this,
@@ -79,23 +77,16 @@
                         return;
                     }
                     const now = new Date();
-                    this.props.secondsInput.value = `${this.normalizeTime(now.getSeconds(), 
-                        timeout.getSeconds(), parseInt(this.props.secondsInput.max) + 1)}`.padStart(2, '0');
-                    this.props.minutesInput.value = `${this.normalizeTime(now.getMinutes(), 
-                        timeout.getMinutes(), parseInt(this.props.minutesInput.max) + 1)}`.padStart(2, '0');
-                    this.props.hoursInput.value = `${this.normalizeTime(now.getHours(), 
-                        timeout.getHours(), parseInt(this.props.hoursInput.max) + 1)}`.padStart(2, '0');
+                    const diff = subtractTime(timeout, {hours: now.getHours(), minutes: now.getMinutes(), seconds: now.getSeconds()});
+                    this.props.secondsInput.value = `${padNum(diff.getSeconds())}`;
+                    this.props.minutesInput.value = `${padNum(diff.getMinutes())}`;
+                    this.props.hoursInput.value = `${padNum(diff.getHours())}`;
                 }, 1000);
             }
             else {
                 clearInterval(this.timerInterval);
                 timerAPI.removeTimer(this.refId);
             }
-        }
-
-        normalizeTime(start, end, max) {
-            const timeDiff = end - start;
-            return timeDiff >= 0 ? timeDiff : max + timeDiff;
         }
 
         toggleInputs() {
