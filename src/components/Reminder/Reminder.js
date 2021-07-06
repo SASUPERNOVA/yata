@@ -18,11 +18,10 @@
                 bodyInput: this.shadowRoot.querySelector('#body-input')
             }
             this.initSoundInput();
-            let date = new Date();
-            date.setDate(date.getDate() + 1);
+            let date = addTime(new Date(), { days: 1 });
             date.setHours(0, 0, 0);
-            date = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-            this.props.datetimeInput.value = date.toISOString().substr(0, date.toISOString().lastIndexOf(':'));
+            date = toNativeTime(date);
+            this.props.datetimeInput.value = date.substr(0, date.lastIndexOf(':'));
             this.props.datetimeInput.addEventListener('change', (ev) => this.onDateTimeChange(ev));
             this.props.toggleSwitch.addEventListener('change', ev => this.reminderSet(ev));
             this.props.soundInput.addEventListener('input', ev => this.dispatchEvent(new Event('input')));
@@ -69,10 +68,10 @@
                     }, 1);
                 }
                 if (this.props.repeatInput.value) {
-                    let next = new Date(this.getRepeat());
+                    let next = this.getRepeat();
                     next.setSeconds(0);
-                    next = new Date(next.getTime() - next.getTimezoneOffset() * 60000);
-                    this.props.datetimeInput.value = `${next.toISOString().substr(0, next.toISOString().lastIndexOf(':'))}`;
+                    next = toNativeTime(next);
+                    this.props.datetimeInput.value = `${next.substr(0, next.lastIndexOf(':'))}`;
                     this.dispatchEvent(new Event('input'));
                     timerAPI.pauseClock();
                     this.setTimer();
@@ -95,8 +94,8 @@
 
         setState(state) {
             let date = new Date(state.datetimeInput);
-            date = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-            this.props.datetimeInput.value = `${date.toISOString().substr(0, date.toISOString().lastIndexOf(':'))}`;
+            date = toNativeTime(date);
+            this.props.datetimeInput.value = `${date.substr(0, date.lastIndexOf(':'))}`;
             this.props.toggleSwitch.onShadowRootReady(() => {
                 this.props.toggleSwitch.checked = state.toggleSwitch;
             });
@@ -134,30 +133,9 @@
         getRepeat() {
             let now = new Date();
             const repeatValue = this.props.repeatInput.valueAsNumber;
-            switch(this.props.repeatTypeInput.value) {
-                case 'minutes':
-                    console.log(now.getMinutes() + repeatValue);
-                    now.setMinutes(now.getMinutes() + repeatValue);
-                    break;
-                case 'hours':
-                    now.setHours(now.getHours() + repeatValue);
-                    break;
-                case 'days':
-                    now.setDate(now.getDate() + repeatValue);
-                    break;
-                case 'weeks':
-                    now.setDate(now.getDate() + repeatValue*7);
-                    break;
-                case 'months':
-                    now.setMonth(now.getMonth() + repeatValue);
-                    break;
-                case 'years':
-                    now.setFullYear(now.getFullYear() + repeatValue);
-                    break;
-                default:
-                    return NaN;
-            }
-            return now.getTime();
+            const repeat = {};
+            repeat[this.props.repeatTypeInput.value] = repeatValue
+            return addTime(now, repeat);
         }
 
         initSoundInput() {
