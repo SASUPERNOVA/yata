@@ -54,12 +54,9 @@
         }
 
         onTimerButtonClick(ev) {
-            const symbol = this.shadowRoot.querySelector('.play, .stop');
-            for (const prop of Object.values(this.props)) {
-                prop.toggleAttribute('disabled');
-            }
-            symbol.classList.toggle('play');
-            symbol.classList.toggle('stop');
+            const symbol = this.shadowRoot.querySelector('span');
+            this.toggleInputs();
+            this.toggleTimerButton();
             if (symbol.classList.contains('stop')) {
                 const hours = this.props.hoursInput.valueAsNumber;
                 const minutes = this.props.minutesInput.valueAsNumber;
@@ -74,6 +71,12 @@
                 }
                 timerAPI.addTimer(message);
                 this.timerInterval = setInterval(() => {
+                    if (this.props.secondsInput.value == 0 && this.props.minutesInput.value == 0 && this.props.hoursInput.value == 0) {
+                        clearInterval(this.timerInterval);
+                        this.toggleInputs();
+                        this.toggleTimerButton();
+                        return;
+                    }
                     const now = new Date();
                     this.props.secondsInput.value = `${this.normalizeTime(now.getSeconds(), 
                         timeout.getSeconds(), parseInt(this.props.secondsInput.max) + 1)}`.padStart(2, '0');
@@ -81,10 +84,6 @@
                         timeout.getMinutes(), parseInt(this.props.minutesInput.max) + 1)}`.padStart(2, '0');
                     this.props.hoursInput.value = `${this.normalizeTime(now.getHours(), 
                         timeout.getHours(), parseInt(this.props.hoursInput.max) + 1)}`.padStart(2, '0');
-
-                    if (this.props.secondsInput.value == 0 && this.props.minutesInput.value == 0 && this.props.hoursInput.value == 0) {
-                        clearInterval(this.timerInterval);
-                    }
                 }, 1000);
             }
             else {
@@ -96,6 +95,18 @@
         normalizeTime(start, end, max) {
             const timeDiff = end - start;
             return timeDiff >= 0 ? timeDiff : max + timeDiff;
+        }
+
+        toggleInputs() {
+            for (const prop of Object.values(this.props)) {
+                prop.toggleAttribute('disabled');
+            }
+        }
+
+        toggleTimerButton() {
+            const symbol = this.shadowRoot.querySelector('span');
+            symbol.classList.toggle('play');
+            symbol.classList.toggle('stop');
         }
     }
 
