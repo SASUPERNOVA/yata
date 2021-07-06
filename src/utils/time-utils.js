@@ -68,3 +68,8 @@ function dateFromTime({ hours, minutes, seconds, milliseconds }) {
 
     return date;
 }
+
+function toNativeTime(date) {
+    date = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    return`${date.toISOString().slice(0, -1)}`;
+}
