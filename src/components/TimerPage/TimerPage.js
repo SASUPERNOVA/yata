@@ -13,7 +13,9 @@
                 secondsInput: this.shadowRoot.querySelector('#seconds'),
                 soundInput: this.shadowRoot.querySelector('#sound-input')
             }
-            this.initSoundInput();
+            this.props.soundInput.onShadowRootReady(() => {
+                this.initSoundInput();
+            });
             this.props.hoursInput.addEventListener('focus', ev => this.onFocus(ev));
             this.props.minutesInput.addEventListener('focus', ev => this.onFocus(ev));
             this.props.secondsInput.addEventListener('focus', ev => this.onFocus(ev));
@@ -106,6 +108,7 @@
         onTimerFinished(ev) {
             const notification = new Notification('Timer Finished!');
             const audio = new Audio(this.props.soundInput.value);
+            audio.loop = true;
             audio.play();
             const focusInterval = setInterval(() => {
                 if (document.hasFocus()) {
@@ -122,6 +125,7 @@
         initSoundInput() {
             const extensions = ['wav', 'mp3', 'mp4', 'aac', 'ogg', 'webm', 'caf', 'flac'];
             this.props.soundInput.setOptions({filters: [{name: 'Audio Files', extensions: extensions}, {name: 'All Files', extensions: ['*']}]});
+            this.props.soundInput.value = 'media/alarm-sound.flac';
         }
     }
 
