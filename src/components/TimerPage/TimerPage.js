@@ -10,8 +10,10 @@
             this.props = {
                 hoursInput: this.shadowRoot.querySelector('#hours'),
                 minutesInput: this.shadowRoot.querySelector('#minutes'),
-                secondsInput: this.shadowRoot.querySelector('#seconds')
+                secondsInput: this.shadowRoot.querySelector('#seconds'),
+                soundInput: this.shadowRoot.querySelector('#sound-input')
             }
+            this.initSoundInput();
             this.props.hoursInput.addEventListener('focus', ev => this.onFocus(ev));
             this.props.minutesInput.addEventListener('focus', ev => this.onFocus(ev));
             this.props.secondsInput.addEventListener('focus', ev => this.onFocus(ev));
@@ -102,7 +104,24 @@
         }
 
         onTimerFinished(ev) {
-            new Notification('Donezo!!!');
+            const notification = new Notification('Timer Finished!');
+            const audio = new Audio(this.props.soundInput.value);
+            audio.play();
+            const focusInterval = setInterval(() => {
+                if (document.hasFocus()) {
+                    audio.pause();
+                    clearInterval(focusInterval);
+                }
+            }, 1);
+            notification.addEventListener('click', () => {
+                audio.pause();
+                clearInterval(focusInterval);
+            });
+        }
+
+        initSoundInput() {
+            const extensions = ['wav', 'mp3', 'mp4', 'aac', 'ogg', 'webm', 'caf', 'flac'];
+            this.props.soundInput.setOptions({filters: [{name: 'Audio Files', extensions: extensions}, {name: 'All Files', extensions: ['*']}]});
         }
     }
 

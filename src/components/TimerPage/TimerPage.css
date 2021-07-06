@@ -69,3 +69,25 @@ footer {
     height: 2rem;
     background-color: black;
 }
+
+aside {
+    height: 100%;
+    position: fixed;
+    left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+::part(file-browser) {
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    transform: translate(0rem, -100%);
+}
+
+::part(file-display) {
+    display: none;
+}
