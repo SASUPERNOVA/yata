@@ -19,6 +19,7 @@
             this.props.minutesInput.addEventListener('beforeinput', (ev) => this.onInput(ev));
             this.props.secondsInput.addEventListener('beforeinput', (ev) => this.onInput(ev));
             this.shadowRoot.querySelector('#timer-button').addEventListener('click', (ev) => this.onTimerButtonClick(ev));
+            this.addEventListener('timer-finished', (ev) => this.onTimerFinished(ev));
         }
 
         onInput(ev) {
@@ -107,6 +108,10 @@
             const symbol = this.shadowRoot.querySelector('span');
             symbol.classList.toggle('play');
             symbol.classList.toggle('stop');
+        }
+
+        onTimerFinished(ev) {
+            new Notification('Donezo!!!');
         }
     }
 
