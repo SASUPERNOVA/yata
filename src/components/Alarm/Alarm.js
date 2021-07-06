@@ -64,7 +64,7 @@
                 this.props.toggleSwitch.checked = state.toggleSwitch;
             });
             this.props.soundInput.onShadowRootReady(() => {
-                this.props.soundInput.value = state.soundInput;
+                this.props.soundInput.value = state.soundInput ? state.soundInput : 'media/alarm-sound.flac';
                 this.initSoundInput();
             });
             this.props.titleInput.value = state.titleInput;
