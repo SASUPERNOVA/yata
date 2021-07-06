@@ -53,3 +53,18 @@ function subtractTime(date, { years, months, days, hours, minutes, seconds, mill
     extraTime += milliseconds ? milliseconds : 0;
     return  new Date(date.getTime() - extraTime);
 }
+
+function getFullDate(date) {
+    return `${date.getFullYear()}-${padNum(date.getMonth()+1)}-${padNum(date.getDate())}`;
+}
+
+function getFullTime(date) {
+    return `${padNum(date.getHours())}:${padNum(date.getMinutes())}:${padNum(date.getSeconds())}.${padNum(date.getMilliseconds())}`;
+}
+
+function dateFromTime({ hours, minutes, seconds, milliseconds }) {
+    let date = new Date();
+    date.setHours(hours ? hours : 0, minutes ? minutes : 0, seconds ? seconds : 0, milliseconds ? milliseconds : 0);
+
+    return date;
+}
