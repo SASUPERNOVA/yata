@@ -76,8 +76,6 @@
                 this.timerInterval = setInterval(() => {
                     if (this.props.secondsInput.value == 0 && this.props.minutesInput.value == 0 && this.props.hoursInput.value == 0) {
                         clearInterval(this.timerInterval);
-                        this.toggleInputs();
-                        this.toggleTimerButton();
                         return;
                     }
                     const now = new Date();
@@ -89,6 +87,7 @@
             }
             else {
                 clearInterval(this.timerInterval);
+                delete this.timerInterval;
                 timerAPI.removeTimer(this.refId);
             }
         }
@@ -108,25 +107,27 @@
 
         onTimerFinished(ev) {
             const notification = new Notification('Timer Finished!');
+            this.toggleBlink();
             const audio = new Audio(this.props.soundInput.value);
             audio.loop = true;
             audio.play();
-            const focusInterval = setInterval(() => {
-                if (document.hasFocus()) {
-                    audio.pause();
-                    clearInterval(focusInterval);
-                }
-            }, 1);
-            notification.addEventListener('click', () => {
+            const onStopClicked = () => {
+                this.toggleBlink();
                 audio.pause();
-                clearInterval(focusInterval);
-            });
+                this.shadowRoot.querySelector('#timer-button').removeEventListener('click', onStopClicked);
+            }
+            this.shadowRoot.querySelector('#timer-button').addEventListener('click', onStopClicked);
+            notification.addEventListener('click', onStopClicked);
         }
 
         initSoundInput() {
             const extensions = ['wav', 'mp3', 'mp4', 'aac', 'ogg', 'webm', 'caf', 'flac'];
             this.props.soundInput.setOptions({filters: [{name: 'Audio Files', extensions: extensions}, {name: 'All Files', extensions: ['*']}]});
             this.props.soundInput.value = 'media/alarm-sound.flac';
+        }
+
+        toggleBlink() {
+            this.shadowRoot.querySelector("#timer").classList.toggle('blink');
         }
     }
 

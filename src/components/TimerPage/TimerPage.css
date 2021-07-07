@@ -91,3 +91,12 @@ aside {
 ::part(file-display) {
     display: none;
 }
+
+.blink {
+    animation: blink 0.5645s infinite alternate;
+}
+
+@keyframes blink {
+    from {opacity: 1;}
+    to {opacity: 0.25;}
+}
