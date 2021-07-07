@@ -94,8 +94,9 @@
         }
 
         toggleInputs() {
-            for (const prop of Object.values(this.props)) {
-                prop.toggleAttribute('disabled');
+            const time = [this.props.hoursInput, this.props.minutesInput, this.props.secondsInput];
+            for (const unit of time) {
+                unit.toggleAttribute('disabled');
             }
         }
 
