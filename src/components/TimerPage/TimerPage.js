@@ -106,6 +106,7 @@
         }
 
         onTimerFinished(ev) {
+            timerAPI.pauseClock();
             const notification = new Notification('Timer Finished!');
             this.toggleBlink();
             const audio = new Audio(this.props.soundInput.value);
@@ -115,6 +116,7 @@
                 this.toggleBlink();
                 audio.pause();
                 this.shadowRoot.querySelector('#timer-button').removeEventListener('click', onStopClicked);
+                timerAPI.resumeClock();
             }
             this.shadowRoot.querySelector('#timer-button').addEventListener('click', onStopClicked);
             notification.addEventListener('click', onStopClicked);
