@@ -54,11 +54,9 @@
             const now = new Date();
             const reminderTime = this.getDate()
             const timeDiff = now.getTime() - reminderTime.getTime();
-            let notification;
             if (timeDiff < 86400000 && now.getDate() == reminderTime.getDate()) {
-                if (this.props.titleInput.value || this.props.bodyInput.value) {
-                    notification = new Notification(this.props.titleInput.value, { body: this.props.bodyInput.value });
-                }
+                const notification = new Notification(this.props.titleInput.value ? this.props.titleInput.value : 'Reminder', 
+                { body: this.props.bodyInput.value ? this.props.bodyInput.value : toNativeTime(new Date()) });
                 if (this.props.soundInput.value && !document.hasFocus()) {
                     const audio = new Audio(this.props.soundInput.value);
                     audio.play();
