@@ -80,6 +80,10 @@
                     this.setTimer();
                     timerAPI.resumeClock();
                 }
+                else {
+                    this.props.toggleSwitch.checked = false;
+                    this.dispatchEvent(new Event('input'));
+                }
             }
         }
 
