@@ -53,8 +53,7 @@
         onShowReminder(ev) {
             const now = new Date();
             const reminderTime = this.getDate()
-            const timeDiff = now.getTime() - reminderTime.getTime();
-            if (timeDiff < 86400000 && now.getDate() == reminderTime.getDate()) {
+            if (getFullDate(now) == getFullDate(reminderTime)) {
                 const notification = new Notification(this.props.titleInput.value ? this.props.titleInput.value : 'Reminder', 
                 { body: this.props.bodyInput.value ? this.props.bodyInput.value : toNativeTime(new Date()) });
                 if (this.props.soundInput.value && !document.hasFocus()) {
