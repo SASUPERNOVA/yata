@@ -25,7 +25,7 @@
             this.props.datetimeInput.addEventListener('change', (ev) => this.onDateTimeChange(ev));
             this.props.toggleSwitch.addEventListener('change', ev => this.reminderSet(ev));
             this.props.soundInput.addEventListener('input', ev => this.dispatchEvent(new Event('input')));
-            this.addEventListener('show-reminder', async (ev) => this.onShowReminder(ev));
+            this.addEventListener('show-reminder', (ev) => this.onShowReminder(ev));
         }
 
         deleteClick(ev) {
@@ -54,11 +54,12 @@
             const now = new Date();
             const reminderTime = this.getDate()
             const timeDiff = now.getTime() - reminderTime.getTime();
+            let notification;
             if (timeDiff < 86400000 && now.getDate() == reminderTime.getDate()) {
                 if (this.props.titleInput.value || this.props.bodyInput.value) {
-                    new Notification(this.props.titleInput.value, { body: this.props.bodyInput.value });
+                    notification = new Notification(this.props.titleInput.value, { body: this.props.bodyInput.value });
                 }
-                if (this.props.soundInput.value) {
+                if (this.props.soundInput.value && !document.hasFocus()) {
                     const audio = new Audio(this.props.soundInput.value);
                     audio.play();
                     const focusInterval = setInterval(() => {
@@ -67,6 +68,10 @@
                             clearInterval(focusInterval);
                         }
                     }, 1);
+                    notification.addEventListener('click', () =>{
+                        audio.pause();
+                        clearInterval(focusInterval);
+                    });
                 }
                 if (this.props.repeatInput.value) {
                     let next = this.getRepeat();
