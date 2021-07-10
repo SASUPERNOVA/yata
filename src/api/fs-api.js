@@ -1,4 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron');
+const { exec } = require('child_process');
 
 contextBridge.exposeInMainWorld('fsAPI', {
     saveFile: (fileName, data) => {
@@ -16,6 +17,16 @@ contextBridge.exposeInMainWorld('fsAPI', {
     openFileDialog: async (options) => {
         let files = await ipcRenderer.invoke('file-dialog-open', options);
         return files;
+    },
+    run: (command, args='') => {
+        exec(`${command}${args ? ' ' : ''}${args}`, (error, _stdout, stderr) => {
+            if (error) {
+                console.error(`error: ${error}`);
+            }
+            if (stderr) {
+                console.error(`stderr: ${stderr}`);
+            }
+        });
     }
 });
 
