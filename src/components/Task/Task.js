@@ -68,6 +68,36 @@
                 fsAPI.run(this.props.runFileInput.value, this.props.argsInput.value);
             }
         }
+
+        getState() {
+            return {
+                timeInput: this.getDate().getTime(),
+                toggleSwitch: this.props.toggleSwitch.checked,
+                runCommandRadio: this.props.runCommandRadio.checked,
+                runFileRadio: this.props.runFileRadio.checked,
+                runFileInput: this.props.runFileInput.value,
+                argsInput: this.props.argsInput.value
+            }
+        }
+
+        setState(state) {
+            const date = new Date(state.timeInput);
+            const time = getFullTime(date);
+            this.props.timeInput.value = `${time.slice(0, time.lastIndexOf(':'))}`;
+            this.props.toggleSwitch.onShadowRootReady(() => {
+                this.props.toggleSwitch.checked = state.toggleSwitch;
+            });
+            this.props.runCommandRadio.checked = state.runCommandRadio;
+            this.props.runFileRadio.checked = state.runFileRadio;
+            this.props.argsInput.value = state.argsInput;
+            if (this.props.runFileRadio.checked) {
+                this.props.runCommandInput.classList.remove('active');
+                this.props.runFile.classList.add('active');
+            }
+            if (state.toggleSwitch) {
+                this.setTimer();
+            }
+        }
     }
 
     customElements.define('task-component', Task);
