@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="css/global.css">
+<link id="" rel="stylesheet" href="components/Task/Task.css">
+<template id="task-component">
+    <input id="time-input" type="time" value="06:00">
+    <toggle-switch></toggle-switch>
+    <button id="delete-button">Delete</button>
+    <fieldset>
+        <legend>Run</legend>
+        <label>
+            <span>Command</span>
+            <input id="command-radio" name="run" type="radio" checked>
+        </label>
+        <label>
+            <span>File</span>
+            <input id="command-radio" name="run" type="radio">
+        </label>
+        <input id="run-command-input" type="text" class="active" placeholder="Command">
+        <fieldset id="run-file">
+            <file-input id="run-file-input">File</file-input>
+            <input id="args-input" placeholder="args">
+        </fieldset>
+    </fieldset>
+    <hr>
+</template>

@@ -1,0 +1,20 @@
+#run-command-input, #run-file {
+    display: none;
+}
+
+#run-command-input.active, #run-file.active {
+    display: block;
+}
+
+#run-file {
+    border: none;
+}
+
+#run-file * {
+    display: block;
+    margin: 0.1rem;
+}
+
+#run-command-input, #args-input {
+    width: 50%;
+}
