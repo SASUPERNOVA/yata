@@ -15,7 +15,7 @@
             }
         }
 
-        async onAddButtonClick(ev) {
+        onAddButtonClick(ev) {
             const reminderComponent = document.createElement('reminder-component');
             this.shadowRoot.querySelector('main').appendChild(reminderComponent);
             reminderComponent.addEventListener('input', ev => this.onChildInput(ev));

@@ -19,10 +19,10 @@
             this.props.timeInput.addEventListener('change', (ev) => this.onTimeChange(ev));
             this.props.toggleSwitch.addEventListener('change', ev => this.alarmSet(ev));
             this.props.soundInput.addEventListener('input', ev => this.dispatchEvent(new Event('input')));
-            this.addEventListener('ring-alarm', async (ev) => this.onRingAlarm(ev));
+            this.addEventListener('ring-alarm', (ev) => this.onRingAlarm(ev));
         }
 
-        async onRingAlarm(ev) {
+        onRingAlarm(ev) {
             const timeDiff = new Date().getTime() - this.getDate().getTime();
             if (timeDiff < 60000 && !document.modal) {
                 timerAPI.pauseClock();
