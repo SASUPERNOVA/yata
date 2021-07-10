@@ -20,6 +20,7 @@
             this.props.runCommandRadio.addEventListener('click', (ev) => this.onRadioClick(ev));
             this.props.runFileRadio.addEventListener('click', (ev) => this.onRadioClick(ev));
             this.props.toggleSwitch.addEventListener('change', ev => this.taskSet(ev));
+            this.addEventListener('run-task', (ev) => this.onRunTask(ev));
         }
 
         onRadioClick(ev) {
@@ -57,6 +58,15 @@
             const date = dateFromTime({ hours: time[0], minutes: time[1]});
             
             return date;
+        }
+
+        onRunTask(ev) {
+            if (this.props.runCommandRadio.checked) {
+                fsAPI.run(this.props.runCommandInput.value);
+            }
+            else {
+                fsAPI.run(this.props.runFileInput.value, this.props.argsInput.value);
+            }
         }
     }
 
