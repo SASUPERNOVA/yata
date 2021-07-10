@@ -11,7 +11,7 @@ contextBridge.exposeInMainWorld('fsAPI', {
             return data;
         }
         catch (err) {
-            console.log(err);
+            console.error(err);
         }
     },
     openFileDialog: async (options) => {
@@ -31,5 +31,5 @@ contextBridge.exposeInMainWorld('fsAPI', {
 });
 
 ipcRenderer.on('save-failed', (event, err) => {
-    console.log(err);
+    console.error(err);
 });
