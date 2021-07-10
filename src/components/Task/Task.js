@@ -92,7 +92,9 @@
             this.props.runCommandRadio.checked = state.runCommandRadio;
             this.props.runFileRadio.checked = state.runFileRadio;
             this.props.runCommandInput.value = state.runCommandInput;
-            this.props.runFileInput.value = state.runFileInput;
+            this.props.runFileInput.onShadowRootReady(() => {
+                this.props.runFileInput.value = state.runFileInput;
+            });
             this.props.argsInput.value = state.argsInput;
             if (this.props.runFileRadio.checked) {
                 this.props.runCommandInput.classList.remove('active');
