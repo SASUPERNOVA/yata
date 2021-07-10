@@ -7,6 +7,7 @@
         async connectedCallback() {
             await super.connectedCallback();
             this.setRefId(this.genURefId());
+            this.shadowRoot.querySelector('#delete-button').addEventListener('click', (ev) => this.deleteClick(ev));
             this.props = {
                 timeInput: this.shadowRoot.querySelector('#time-input'),
                 toggleSwitch: this.shadowRoot.querySelector('toggle-switch'),
@@ -100,6 +101,12 @@
             if (state.toggleSwitch) {
                 this.setTimer();
             }
+        }
+
+        deleteClick(ev) {
+            const host = this.hostComponent();
+            this.remove();
+            host.dispatchEvent(new CustomEvent('child-removed'));
         }
     }
 
