@@ -75,6 +75,7 @@
                 toggleSwitch: this.props.toggleSwitch.checked,
                 runCommandRadio: this.props.runCommandRadio.checked,
                 runFileRadio: this.props.runFileRadio.checked,
+                runCommandInput: this.props.runCommandInput.value,
                 runFileInput: this.props.runFileInput.value,
                 argsInput: this.props.argsInput.value
             }
@@ -89,6 +90,8 @@
             });
             this.props.runCommandRadio.checked = state.runCommandRadio;
             this.props.runFileRadio.checked = state.runFileRadio;
+            this.props.runCommandInput.value = state.runCommandInput;
+            this.props.runFileInput.value = state.runFileInput;
             this.props.argsInput.value = state.argsInput;
             if (this.props.runFileRadio.checked) {
                 this.props.runCommandInput.classList.remove('active');
