@@ -41,6 +41,21 @@
             const children = Array.from(this.shadowRoot.querySelector('main').children);
             fsAPI.saveFile('TaskPage.json', {data: Array.from(children).map(task => task.getState())});
         }
+
+        onChildInput(ev) {
+            const save = () => {
+                this.saveTasks();
+                delete this.isTyping;
+            }
+
+            if (!this.isTyping) {
+                this.isTyping = setTimeout(save, 2000);
+            }
+            else {
+                clearTimeout(this.isTyping);
+                this.isTyping = setTimeout(save, 2000);
+            }
+        }
     }
 
     customElements.define('task-page', TaskPage);
