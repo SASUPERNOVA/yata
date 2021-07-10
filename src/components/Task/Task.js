@@ -6,6 +6,7 @@
         
         async connectedCallback() {
             await super.connectedCallback();
+            this.setRefId(this.genURefId());
             this.props = {
                 timeInput: this.shadowRoot.querySelector('#time-input'),
                 toggleSwitch: this.shadowRoot.querySelector('toggle-switch'),
@@ -18,6 +19,7 @@
             }
             this.props.runCommandRadio.addEventListener('click', (ev) => this.onRadioClick(ev));
             this.props.runFileRadio.addEventListener('click', (ev) => this.onRadioClick(ev));
+            this.props.toggleSwitch.addEventListener('change', ev => this.taskSet(ev));
         }
 
         onRadioClick(ev) {
@@ -29,6 +31,32 @@
                 this.props.runCommandInput.classList.remove('active');
                 this.props.runFile.classList.add('active');
             }
+        }
+
+        taskSet(ev) {
+            if (ev.target.checked) {
+                this.setTimer();
+            }
+            else {
+                timerAPI.removeTimer(this.refId);
+            }
+        }
+
+        setTimer() {
+            let date = this.getDate();
+            const message = {
+                time: date.getTime(),
+                page: this.hostComponent(),
+                refId: this.getAttribute('ref-id')
+            }
+            timerAPI.addTimer(message);
+        }
+
+        getDate() {
+            const time = this.props.timeInput.value.split(':');
+            const date = dateFromTime({ hours: time[0], minutes: time[1]});
+            
+            return date;
         }
     }
 
