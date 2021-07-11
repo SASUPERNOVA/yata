@@ -70,11 +70,14 @@
         }
 
         onRunTask(ev) {
-            if (this.props.runCommandRadio.checked) {
-                fsAPI.run(this.props.runCommandInput.value);
-            }
-            else {
-                fsAPI.run(this.props.runFileInput.value, this.props.argsInput.value);
+            const timeDiff = new Date().getTime() - this.getDate().getTime();
+            if (timeDiff < toMilliseconds(1, TimeType.MINUTE)) {
+                if (this.props.runCommandRadio.checked) {
+                    fsAPI.run(this.props.runCommandInput.value);
+                }
+                else {
+                    fsAPI.run(this.props.runFileInput.value, this.props.argsInput.value);
+                }
             }
         }
 
