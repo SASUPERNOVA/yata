@@ -18,10 +18,18 @@
                 runFileInput: this.shadowRoot.querySelector('#run-file-input'),
                 argsInput: this.shadowRoot.querySelector('#args-input')
             }
+            this.props.timeInput.addEventListener('change', (ev) => this.onTimeChange(ev));
             this.props.runCommandRadio.addEventListener('click', (ev) => this.onRadioClick(ev));
             this.props.runFileRadio.addEventListener('click', (ev) => this.onRadioClick(ev));
             this.props.toggleSwitch.addEventListener('change', ev => this.taskSet(ev));
             this.addEventListener('run-task', (ev) => this.onRunTask(ev));
+        }
+
+        onTimeChange(ev) {
+            if (!this.props.toggleSwitch.checked) {
+                return;
+            }
+            this.setTimer();
         }
 
         onRadioClick(ev) {
