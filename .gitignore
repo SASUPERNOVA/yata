@@ -87,3 +87,9 @@ typings/
 
 # Electron-Forge
 out/
+
+AlarmPage.json
+
+ReminderPage.json
+
+TaskPage.json
