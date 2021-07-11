@@ -57,7 +57,7 @@
             const message = {
                 time: date.getTime(),
                 page: this.hostComponent(),
-                refId: this.getAttribute('ref-id')
+                refId: this.refId
             }
             timerAPI.addTimer(message);
         }
