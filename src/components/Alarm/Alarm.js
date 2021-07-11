@@ -24,7 +24,7 @@
 
         onRingAlarm(ev) {
             const timeDiff = new Date().getTime() - this.getDate().getTime();
-            if (timeDiff < 60000 && !document.modal) {
+            if (timeDiff < toMilliseconds(1, TimeType.MINUTE) && !document.modal) {
                 timerAPI.pauseClock();
                 if (this.props.titleInput.value || this.props.bodyInput.value) {
                     new Notification(this.props.titleInput.value, { body: this.props.bodyInput.value });
