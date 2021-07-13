@@ -1,10 +1,12 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Menu, Tray } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
+
+let appTray;
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -22,6 +24,27 @@ const createWindow = () => {
       throw err;
     }
   });
+
+  mainWindow.on('close', (ev) => {
+    if (!app.mustQuit) {
+      mainWindow.hide();
+      mainWindow.setSkipTaskbar(true);
+      ev.preventDefault();
+    }
+  });
+
+  appTray = new Tray(path.join(__dirname, 'Dummy.png'));
+  const contextMenu = Menu.buildFromTemplate([
+    {label: 'Open', type: 'normal', click: () => {
+      mainWindow.restore();
+      mainWindow.setSkipTaskbar(false);
+    }},
+    {label: 'Quit', type: 'normal', click: () => {
+      app.mustQuit = true;
+      app.quit();
+    }}
+  ]);
+  appTray.setContextMenu(contextMenu);
 };
 
 app.on('ready', createWindow);
