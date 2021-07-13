@@ -34,18 +34,16 @@
                     document.modal = document.createElement('alarm-modal');
                     const body = document.querySelector('body');
                     body.appendChild(document.modal);
-                    const audio = new Audio(this.props.soundInput.value);
-                    audio.loop = true;
-                    audio.play();
+                    audioAPI.playAudio(this, this.props.soundInput.value, true);
                     document.modal.addEventListener('close', () => {
                         body.removeChild(document.modal);
-                        audio.pause();
+                        audioAPI.pauseAudio(this);
                         delete document.modal;
                         timerAPI.resumeClock(this);
                     });
                     notification.addEventListener('click', () => {
                         body.removeChild(document.modal);
-                        audio.pause();
+                        audioAPI.pauseAudio(this);
                         delete document.modal;
                         timerAPI.resumeClock(this);
                     })

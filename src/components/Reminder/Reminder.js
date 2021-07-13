@@ -57,16 +57,15 @@
                 const notification = new Notification(this.props.titleInput.value ? this.props.titleInput.value : 'Reminder', 
                 { body: this.props.bodyInput.value ? this.props.bodyInput.value : toNativeTime(new Date()) });
                 if (this.props.soundInput.value && !document.hasFocus()) {
-                    const audio = new Audio(this.props.soundInput.value);
-                    audio.play();
+                    audioAPI.playAudio(this, this.props.soundInput.value);
                     const focusInterval = setInterval(() => {
                         if (document.hasFocus()) {
-                            audio.pause();
+                            audioAPI.pauseAudio(this);
                             clearInterval(focusInterval);
                         }
                     }, 1);
                     notification.addEventListener('click', () =>{
-                        audio.pause();
+                        audioAPI.pauseAudio(this);
                         clearInterval(focusInterval);
                     });
                 }
