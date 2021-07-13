@@ -34,7 +34,7 @@ app.on('activate', () => {
 });
 
 ipcMain.on('save-file', (event, fileName, data) => {
-  fs.writeFile(path.join(__dirname, fileName), JSON.stringify(data, null, ' '), (err) => {
+  fs.writeFile(path.join(__dirname, 'userData', fileName), JSON.stringify(data, null, ' '), (err) => {
     if (err) {
       event.sender.send('save-failed', err);
     }
@@ -43,7 +43,7 @@ ipcMain.on('save-file', (event, fileName, data) => {
 
 ipcMain.handle('load-file', async (event, fileName) => {
   try {
-    const data = await fs.promises.readFile(path.join(__dirname, fileName));
+    const data = await fs.promises.readFile(path.join(__dirname, 'userData', fileName));
     return JSON.parse(data);
   }
   catch (err) {
