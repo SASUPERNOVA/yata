@@ -26,7 +26,7 @@
             const timeDiff = new Date().getTime() - this.getDate().getTime();
             let notification;
             if (timeDiff < toMilliseconds(1, TimeType.MINUTE) && !document.modal) {
-                timerAPI.pauseClock();
+                timerAPI.pauseClock(this);
                 if (this.props.titleInput.value || this.props.bodyInput.value) {
                     notification = new Notification(this.props.titleInput.value, { body: this.props.bodyInput.value });
                 }
@@ -41,13 +41,13 @@
                         body.removeChild(document.modal);
                         audio.pause();
                         delete document.modal;
-                        timerAPI.resumeClock();
+                        timerAPI.resumeClock(this);
                     });
                     notification.addEventListener('click', () => {
                         body.removeChild(document.modal);
                         audio.pause();
                         delete document.modal;
-                        timerAPI.resumeClock();
+                        timerAPI.resumeClock(this);
                     })
                 }
             }
