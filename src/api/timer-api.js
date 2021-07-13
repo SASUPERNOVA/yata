@@ -18,12 +18,16 @@ let timer = setInterval(pollQueue, 1000);
 
 contextBridge.exposeInMainWorld('timerAPI', {
     addTimer: (message) => {
+        clearInterval(timer);
         const { time, page, refId } = message;
         if (refIds[refId]) {
             timerQueue.remove(refId, refIds[refId].time);
         }
         timerQueue.put(refId, time);
         refIds[refId] = {time, page};
+        if (!pauseRef) {
+            timer = setInterval(pollQueue, 1000);
+        }
     },
     removeTimer: (refId) => {
         timerQueue.remove(refId, refIds[refId].time);

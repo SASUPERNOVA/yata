@@ -76,9 +76,7 @@
                     next = toNativeTime(next);
                     this.props.datetimeInput.value = `${next.substr(0, next.lastIndexOf(':'))}`;
                     this.dispatchEvent(new Event('input'));
-                    timerAPI.pauseClock();
                     this.setTimer();
-                    timerAPI.resumeClock();
                 }
                 else {
                     this.props.toggleSwitch.checked = false;
