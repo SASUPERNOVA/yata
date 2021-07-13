@@ -14,7 +14,7 @@
             this.props.fileBrowser.addEventListener('click', async (ev) => this.onFileBrowserClick(ev));
         }
 
-        async onFileBrowserClick(ev) {
+        async onFileBrowserClick(_ev) {
             const files = await fsAPI.openFileDialog(this.options);
             if (files) {
                 this.value = files[0];

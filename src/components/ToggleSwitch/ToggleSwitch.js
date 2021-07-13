@@ -7,14 +7,14 @@
         async connectedCallback() {
             await super.connectedCallback();
             this.shadowRoot.querySelector('#checkbox').addEventListener('change', (ev) => this.change(ev));
-            this.shadowRoot.querySelector('#checkbox').addEventListener('input', ev => this.input(ev));
+            this.shadowRoot.querySelector('#checkbox').addEventListener('input', (ev) => this.input(ev));
         }
 
-        change(ev) {
+        change(_ev) {
             this.dispatchEvent(new Event('change'));
         }
 
-        input(ev) {
+        input(_ev) {
             this.dispatchEvent(new Event('input'));
         }
 

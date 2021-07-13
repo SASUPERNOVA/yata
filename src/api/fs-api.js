@@ -30,6 +30,6 @@ contextBridge.exposeInMainWorld('fsAPI', {
     }
 });
 
-ipcRenderer.on('save-failed', (event, err) => {
+ipcRenderer.on('save-failed', (_event, err) => {
     console.error(err);
 });

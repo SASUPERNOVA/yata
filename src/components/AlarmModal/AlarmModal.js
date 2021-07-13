@@ -6,7 +6,7 @@
 
         async connectedCallback() {
             await super.connectedCallback();
-            this.shadowRoot.querySelector('#dismiss-button').addEventListener('click', () => this.dispatchEvent(new Event('close')));
+            this.shadowRoot.querySelector('#dismiss-button').addEventListener('click', (_ev) => this.dispatchEvent(new Event('close')));
         }
     }
 

@@ -7,15 +7,15 @@
         async connectedCallback() {
             await super.connectedCallback();
             this.shadowRoot.querySelector('add-button').addEventListener('addbutton-click', (ev) => this.onAddButtonClick(ev));
-            this.addEventListener('timer-finished', ev => this.onTimerFinished(ev));
-            this.addEventListener('child-removed', _ev => this.saveReminders());
+            this.addEventListener('timer-finished', (ev) => this.onTimerFinished(ev));
+            this.addEventListener('child-removed', (_ev) => this.saveReminders());
             const file = await fsAPI.loadFile('ReminderPage.json');
             if (file) {
                 this.initialize(file.data);
             }
         }
 
-        onAddButtonClick(ev) {
+        onAddButtonClick(_ev) {
             const reminderComponent = document.createElement('reminder-component');
             this.shadowRoot.querySelector('main').appendChild(reminderComponent);
             reminderComponent.addEventListener('input', ev => this.onChildInput(ev));
@@ -33,7 +33,7 @@
             }
         }
 
-        onChildInput(ev) {
+        onChildInput(_ev) {
             const save = () => {
                 this.saveReminders();
                 delete this.isTyping;

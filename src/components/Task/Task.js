@@ -21,11 +21,11 @@
             this.props.timeInput.addEventListener('change', (ev) => this.onTimeChange(ev));
             this.props.runCommandRadio.addEventListener('click', (ev) => this.onRadioClick(ev));
             this.props.runFileRadio.addEventListener('click', (ev) => this.onRadioClick(ev));
-            this.props.toggleSwitch.addEventListener('change', ev => this.taskSet(ev));
+            this.props.toggleSwitch.addEventListener('change', (ev) => this.taskSet(ev));
             this.addEventListener('run-task', (ev) => this.onRunTask(ev));
         }
 
-        onTimeChange(ev) {
+        onTimeChange(_ev) {
             if (!this.props.toggleSwitch.checked) {
                 return;
             }
@@ -69,7 +69,7 @@
             return date;
         }
 
-        onRunTask(ev) {
+        onRunTask(_ev) {
             const timeDiff = new Date().getTime() - this.getDate().getTime();
             if (timeDiff < toMilliseconds(1, TimeType.MINUTE)) {
                 if (this.props.runCommandRadio.checked) {
@@ -116,7 +116,7 @@
             }
         }
 
-        deleteClick(ev) {
+        deleteClick(_ev) {
             const host = this.hostComponent();
             this.remove();
             host.dispatchEvent(new CustomEvent('child-removed'));

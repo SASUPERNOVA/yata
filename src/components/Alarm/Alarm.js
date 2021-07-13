@@ -17,12 +17,12 @@
             }
             this.initSoundInput();
             this.props.timeInput.addEventListener('change', (ev) => this.onTimeChange(ev));
-            this.props.toggleSwitch.addEventListener('change', ev => this.alarmSet(ev));
-            this.props.soundInput.addEventListener('input', ev => this.dispatchEvent(new Event('input')));
+            this.props.toggleSwitch.addEventListener('change', (ev) => this.alarmSet(ev));
+            this.props.soundInput.addEventListener('input', (_ev) => this.dispatchEvent(new Event('input')));
             this.addEventListener('ring-alarm', (ev) => this.onRingAlarm(ev));
         }
 
-        onRingAlarm(ev) {
+        onRingAlarm(_ev) {
             const timeDiff = new Date().getTime() - this.getDate().getTime();
             if (timeDiff < toMilliseconds(1, TimeType.MINUTE) && !document.modal) {
                 timerAPI.pauseClock();
@@ -74,7 +74,7 @@
             }
         }
 
-        onTimeChange(ev) {
+        onTimeChange(_ev) {
             if (!this.props.toggleSwitch.checked) {
                 return;
             }
@@ -90,7 +90,7 @@
             }
         }
 
-        deleteClick(ev) {
+        deleteClick(_ev) {
             const host = this.hostComponent();
             this.remove();
             host.dispatchEvent(new CustomEvent('child-removed'));

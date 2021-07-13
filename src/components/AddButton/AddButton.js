@@ -9,7 +9,7 @@
             this.shadowRoot.querySelector('#add-btn').addEventListener('click', (ev) => this.click(ev));
         }
 
-        click(ev) {
+        click(_ev) {
             this.dispatchEvent(new CustomEvent('addbutton-click'));
         }
     }

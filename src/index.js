@@ -41,7 +41,7 @@ ipcMain.on('save-file', (event, fileName, data) => {
   });
 });
 
-ipcMain.handle('load-file', async (event, fileName) => {
+ipcMain.handle('load-file', async (_event, fileName) => {
   try {
     const data = await fs.promises.readFile(path.join(__dirname, 'userData', fileName));
     return JSON.parse(data);
@@ -51,7 +51,7 @@ ipcMain.handle('load-file', async (event, fileName) => {
   }
 });
 
-ipcMain.handle('file-dialog-open', async (event, options) => {
+ipcMain.handle('file-dialog-open', async (_event, options) => {
   const fileDialog = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow(), options);
   if (!fileDialog.canceled) {
     return fileDialog.filePaths;

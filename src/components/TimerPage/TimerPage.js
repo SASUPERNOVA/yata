@@ -16,9 +16,9 @@
             this.props.soundInput.onShadowRootReady(() => {
                 this.initSoundInput();
             });
-            this.props.hoursInput.addEventListener('focus', ev => this.onFocus(ev));
-            this.props.minutesInput.addEventListener('focus', ev => this.onFocus(ev));
-            this.props.secondsInput.addEventListener('focus', ev => this.onFocus(ev));
+            this.props.hoursInput.addEventListener('focus', (ev) => this.onFocus(ev));
+            this.props.minutesInput.addEventListener('focus', (ev) => this.onFocus(ev));
+            this.props.secondsInput.addEventListener('focus', (ev) => this.onFocus(ev));
             this.props.hoursInput.addEventListener('beforeinput', (ev) => this.onInput(ev));
             this.props.minutesInput.addEventListener('beforeinput', (ev) => this.onInput(ev));
             this.props.secondsInput.addEventListener('beforeinput', (ev) => this.onInput(ev));
@@ -58,7 +58,7 @@
             ev.target.focused = true;
         }
 
-        onTimerButtonClick(ev) {
+        onTimerButtonClick(_ev) {
             const symbol = this.shadowRoot.querySelector('span');
             this.toggleInputs();
             this.toggleTimerButton();
@@ -105,7 +105,7 @@
             symbol.classList.toggle('stop');
         }
 
-        onTimerFinished(ev) {
+        onTimerFinished(_ev) {
             timerAPI.pauseClock();
             const notification = new Notification('Timer Finished!');
             this.toggleBlink();

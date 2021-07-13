@@ -7,8 +7,8 @@
         async connectedCallback() {
             await super.connectedCallback();
             this.shadowRoot.querySelector('add-button').addEventListener('addbutton-click', (ev) => this.onAddButtonClick(ev));
-            this.addEventListener('timer-finished', ev => this.onTimerFinished(ev));
-            this.addEventListener('child-removed', _ev => this.saveTasks());
+            this.addEventListener('timer-finished', (ev) => this.onTimerFinished(ev));
+            this.addEventListener('child-removed', (_ev) => this.saveTasks());
             const file = await fsAPI.loadFile('TaskPage.json');
             if (file) {
                 this.initialize(file.data);
@@ -26,7 +26,7 @@
             }
         }
 
-        onAddButtonClick(ev) {
+        onAddButtonClick(_ev) {
             const taskComponent = document.createElement('task-component');
             this.shadowRoot.querySelector('main').appendChild(taskComponent);
             taskComponent.addEventListener('input', ev => this.onChildInput(ev));
@@ -42,7 +42,7 @@
             fsAPI.saveFile('TaskPage.json', {data: Array.from(children).map(task => task.getState())});
         }
 
-        onChildInput(ev) {
+        onChildInput(_ev) {
             const save = () => {
                 this.saveTasks();
                 delete this.isTyping;

@@ -7,15 +7,15 @@
         async connectedCallback() {
             await super.connectedCallback();
             this.shadowRoot.querySelector('add-button').addEventListener('addbutton-click', (ev) => this.onAddButtonClick(ev));
-            this.addEventListener('timer-finished', ev => this.onTimerFinished(ev));
-            this.addEventListener('child-removed', _ev => this.saveAlarms());
+            this.addEventListener('timer-finished', (ev) => this.onTimerFinished(ev));
+            this.addEventListener('child-removed', (_ev) => this.saveAlarms());
             const file = await fsAPI.loadFile('AlarmPage.json');
             if (file) {
                 this.initialize(file.data);
             }
         }
 
-        onAddButtonClick(ev) {
+        onAddButtonClick(_ev) {
             const alarmComponent = document.createElement('alarm-component');
             this.shadowRoot.querySelector('main').appendChild(alarmComponent);
             alarmComponent.addEventListener('input', ev => this.onChildInput(ev));
@@ -37,7 +37,7 @@
             }
         }
 
-        onChildInput(ev) {
+        onChildInput(_ev) {
             const save = () => {
                 this.saveAlarms();
                 delete this.isTyping;

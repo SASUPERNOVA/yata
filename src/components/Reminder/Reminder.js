@@ -23,18 +23,18 @@
             date = toNativeTime(date);
             this.props.datetimeInput.value = date.substr(0, date.lastIndexOf(':'));
             this.props.datetimeInput.addEventListener('change', (ev) => this.onDateTimeChange(ev));
-            this.props.toggleSwitch.addEventListener('change', ev => this.reminderSet(ev));
-            this.props.soundInput.addEventListener('input', ev => this.dispatchEvent(new Event('input')));
+            this.props.toggleSwitch.addEventListener('change', (ev) => this.reminderSet(ev));
+            this.props.soundInput.addEventListener('input', (_ev) => this.dispatchEvent(new Event('input')));
             this.addEventListener('show-reminder', (ev) => this.onShowReminder(ev));
         }
 
-        deleteClick(ev) {
+        deleteClick(_ev) {
             const host = this.hostComponent();
             this.remove();
             host.dispatchEvent(new CustomEvent('child-removed'));
         }
 
-        onDateTimeChange(ev) {
+        onDateTimeChange(_ev) {
             if (!this.props.toggleSwitch.checked) {
                 return;
             }
@@ -50,7 +50,7 @@
             }
         }
 
-        onShowReminder(ev) {
+        onShowReminder(_ev) {
             const now = new Date();
             const reminderTime = this.getDate()
             if (getFullDate(now) == getFullDate(reminderTime)) {
