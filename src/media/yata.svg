@@ -8,7 +8,7 @@
    version="1.1"
    id="svg5"
    inkscape:version="1.1 (c4e8f9ed74, 2021-05-24)"
-   sodipodi:docname="yata-spaced.svg"
+   sodipodi:docname="yata.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -26,9 +26,9 @@
      showgrid="true"
      width="256px"
      units="px"
-     inkscape:zoom="4"
-     inkscape:cx="77"
-     inkscape:cy="185.25"
+     inkscape:zoom="16"
+     inkscape:cx="131.625"
+     inkscape:cy="124.75"
      inkscape:window-width="1920"
      inkscape:window-height="1080"
      inkscape:window-x="0"
@@ -220,9 +220,9 @@
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
        id="filter2649"
-       x="-0.039721413"
+       x="-0.039721369"
        y="-0.030370658"
-       width="1.0794428"
+       width="1.0794427"
        height="1.063688">
       <feFlood
          flood-opacity="0.498039"
@@ -341,13 +341,10 @@
          d="m 55.138901,10.170909 c 0,20.372915 -19.446875,17.039166 -19.446875,20.372915 l 1e-6,3.33375"
          id="path428" />
       <path
-         style="fill:none;fill-opacity:1;stroke:url(#linearGradient87);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="m 12.592579,10.170054 c 0,20.372915 19.446875,17.039166 19.446875,20.372915 l -10e-7,3.33375"
-         id="path428-3" />
-      <path
          style="fill:none;fill-opacity:1;stroke:url(#linearGradient89);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         d="M 12.595185,57.583399 C 12.409977,37.210483 32.042059,40.544232 32.042059,37.210483 l -0.0013,-3.332909"
-         id="path570-6" />
+         d="M 12.595185,57.583399 C 12.409977,37.210483 32.042059,40.544232 32.042059,37.210483 l -0.002,-3.333337 -6.52e-4,-3.334177 c 0,-3.333749 -19.446875,0 -19.446875,-20.372915"
+         id="path570-6"
+         sodipodi:nodetypes="cccsc" />
       <path
          style="fill:none;fill-opacity:1;stroke:url(#linearGradient95);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 24.711882,57.58424 c 0,0 5.741458,-8.519583 9.155,-8.519583"
