@@ -12,7 +12,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 1024,
     height: 800,
-    icon: path.join(__dirname, 'Dummy.png'),
+    icon: path.join(__dirname, 'media', 'yata.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true
@@ -33,7 +33,7 @@ const createWindow = () => {
     }
   });
 
-  appTray = new Tray(path.join(__dirname, 'Dummy.png'));
+  appTray = new Tray(path.join(__dirname, 'media', 'yata.png'));
   const contextMenu = Menu.buildFromTemplate([
     {label: 'Open', type: 'normal', click: () => {
       mainWindow.restore();
