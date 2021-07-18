@@ -1,7 +1,7 @@
 (() => {
     class ToggleSwitch extends WebComponent {
         constructor() {
-            super('components/ToggleSwitch/ToggleSwitch.html', 'toggle-switch');
+            super('components/ToggleSwitch/ToggleSwitch.html');
         }
 
         async connectedCallback() {

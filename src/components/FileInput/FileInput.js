@@ -1,7 +1,7 @@
 (() => {
     class FileInput extends WebComponent {
         constructor() {
-            super('components/FileInput/FileInput.html', 'file-input');
+            super('components/FileInput/FileInput.html');
             this.options = undefined;
         }
 

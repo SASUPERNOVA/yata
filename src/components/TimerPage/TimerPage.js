@@ -1,7 +1,7 @@
 (() => {
     class TimerPage extends WebComponent {
         constructor() {
-            super('components/TimerPage/TimerPage.html', 'timer-page');
+            super('components/TimerPage/TimerPage.html');
         }
         
         async connectedCallback() {

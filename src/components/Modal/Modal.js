@@ -1,7 +1,7 @@
 (() => {
     class Modal extends WebComponent {
         constructor() {
-            super('components/Modal/Modal.html', 'modal-component');
+            super('components/Modal/Modal.html');
         }
     }
 

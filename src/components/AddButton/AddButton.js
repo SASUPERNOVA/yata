@@ -1,7 +1,7 @@
 (() => {
     class AddButton extends WebComponent {
         constructor() {
-            super('components/AddButton/AddButton.html', 'add-button');
+            super('components/AddButton/AddButton.html');
         }
 
         async connectedCallback() {

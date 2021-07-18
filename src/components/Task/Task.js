@@ -1,7 +1,7 @@
 (() => {
     class Task extends WebComponent {
         constructor() {
-            super('components/Task/Task.html', 'task-component');
+            super('components/Task/Task.html');
         }
         
         async connectedCallback() {

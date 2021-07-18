@@ -10,7 +10,7 @@ class WebComponent extends HTMLElement {
         const htmlFile = await (await fetch(this.path)).text();
         const vPage = parser.parseFromString(htmlFile, 'text/html');
     
-        const template = vPage.getElementById(this.templateId);
+        const template = this.templateId ? vPage.getElementById(this.templateId) : vPage.querySelector('template');
         const templateContent = template.content;
         const styles = vPage.querySelectorAll('link');
     

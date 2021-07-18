@@ -1,7 +1,7 @@
 (() => {
     class AlarmPage extends WebComponent {
         constructor() {
-            super('components/AlarmPage/AlarmPage.html', 'alarm-page');
+            super('components/AlarmPage/AlarmPage.html');
         }
 
         async connectedCallback() {

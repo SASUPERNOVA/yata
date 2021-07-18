@@ -1,7 +1,7 @@
 (() => {
     class ReminderPage extends WebComponent {
         constructor() {
-            super('components/ReminderPage/ReminderPage.html', 'reminder-page');
+            super('components/ReminderPage/ReminderPage.html');
         }
         
         async connectedCallback() {
