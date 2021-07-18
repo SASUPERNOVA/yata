@@ -7,6 +7,7 @@ if (require('electron-squirrel-startup')) {
 }
 
 let appTray;
+const config = getConfig();
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -26,7 +27,7 @@ const createWindow = () => {
   });
 
   mainWindow.on('close', (ev) => {
-    if (!app.mustQuit) {
+    if (!app.mustQuit && config.useTray) {
       mainWindow.hide();
       mainWindow.setSkipTaskbar(true);
       ev.preventDefault();
@@ -60,6 +61,27 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+function getConfig() {
+  const configPath = path.join(__dirname, 'userData', 'config.json');
+  if (fs.existsSync(configPath)) {
+    let config = fs.readFileSync(configPath);
+    config = JSON.parse(config);
+    return config;
+  }
+  else {
+    const defaultConfig = {
+      useTray: process.platform == 'win32' || process.platform == 'darwin'
+    };
+    fs.writeFile(configPath, JSON.stringify(defaultConfig, null, ' '), (err) => {
+      if (err) {
+        throw err;
+      }
+    })
+
+    return defaultConfig;
+  }
+}
 
 ipcMain.on('save-file', (event, fileName, data) => {
   fs.writeFile(path.join(__dirname, 'userData', fileName), JSON.stringify(data, null, ' '), (err) => {
