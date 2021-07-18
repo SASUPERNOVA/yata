@@ -6,5 +6,7 @@
   }
 
 *:focus {
-    outline: 2px solid #3167ca;
+    /* outline for debugging purposes */
+    /* outline: 2px solid #3167ca; */
+    outline: none;
 }
