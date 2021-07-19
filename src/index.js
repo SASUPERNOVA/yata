@@ -19,6 +19,7 @@ const createWindow = () => {
       contextIsolation: true
     }
   });
+  mainWindow.removeMenu();
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
   fs.mkdir(path.join(__dirname, 'userData'), {recursive: true}, (err) => {
     if (err) {
