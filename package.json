@@ -17,7 +17,7 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "icon": "src/Dummy.png"
+        "icon": "src/media/yata.png"
       },
       "makers": [
         {
