@@ -5,7 +5,7 @@
   "description": "Yet Another Timer App - A hackable timer",
   "main": "src/index.js",
   "scripts": {
-    "start": "electron-forge start",
+    "start": "electron-forge start -- --debug",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
